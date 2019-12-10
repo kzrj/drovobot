@@ -46,6 +46,10 @@ def viber_view(request):
     print(request.POST)
     print(request.GET)
     print(request.headers)
+    print(request.body)
+    print(request.content_type)
+    print(request.COOKIES)
+    print(request.META)
     print('Oppa')
     data_json = json.dumps(request.POST)
     # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
