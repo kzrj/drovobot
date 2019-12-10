@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import json 
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
@@ -44,13 +44,19 @@ class ViberView(View):
 def viber_view(request):
     print(request)
     print(request.POST)
+    print(request.GET)
     print(request.headers)
     print('Oppa')
-    viber_request = viber.parse_request(request.POST)
+    data_json = json.dumps(request.POST)
+    # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
+    #     return Response(status=403)
+
+    viber_request = viber.parse_request(data_json)
+
 
     if isinstance(viber_request, ViberMessageRequest):
         text_message = TextMessage(text="Ты заебал! Звони сюда!")
-        message = viber_request.message
+        # message = viber_request.message
         
         contact = Contact(name="Bato Rinchinov",
             phone_number="+79913693190",
@@ -68,5 +74,5 @@ def viber_view(request):
 
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warn("client failed receiving message. failure: {0}".format(viber_request))
-        
+
     return HttpResponse('Hello, World!')
