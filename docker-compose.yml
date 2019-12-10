@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "80:8080"
+      - "443:443"
+    volumes:
+      - .:/code
+      - ./nginx:/etc/nginx/conf.d
+   
+    depends_on:
+      - backend
+    
+  db:
+    image: postgres:10.1-alpine
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+        
+  backend:
+    build: .
+    # restart: unless-stopped
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+    # command: bash -c "cd masterytest && 
+    #                   python manage.py makemigrations --no-input &&
+    #                   python manage.py migrate &&
+    #                   python manage.py test product.tests.test_views"
+
+    command: bash -c "cd boudoir && 
+                      python manage.py makemigrations --no-input &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
+
+    # command: bash -c "cd masterytest && 
+    #                   python manage.py makemigrations --no-input &&
+    #                   python manage.py migrate &&
+    #                   python manage.py runserver 0.0.0.0:8000"
+    
+    volumes:
+      - .:/code
+      - ./media:/code/media
+    ports:
+      - "8000"
+
+  # viber:
+  #   build: ./viberapi
+  #   volumes:
+  #     - .:/code
+
+  #   command: bash -c "cd viberapi && python viber-flask.py"
+  #   ports:
+  #     - "443:443"
+         
+# volumes:
+  # postgres_data:

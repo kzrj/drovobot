@@ -1,0 +1,7 @@
+*.pyc
+*.log
+/drovobot/*/migrations/*.py
+!/drovobot/*/migrations/__init__.py
+media/
+*.key
+*.pem

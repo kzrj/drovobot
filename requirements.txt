@@ -1,0 +1,9 @@
+Django
+django-filter
+django-rest-swagger==2.1.2
+djangorestframework
+djangorestframework-jwt
+PyJWT
+gunicorn
+psycopg2-binary
+mixer
