@@ -20,6 +20,7 @@ from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 from django.http import HttpResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 
 class ViberView(View):
@@ -27,6 +28,7 @@ class ViberView(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse('Hello, World!')
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         print(request)
         print(request.POST)
