@@ -35,7 +35,6 @@ services:
     command: bash -c "cd drovobot && 
                       python manage.py makemigrations --no-input &&
                       python manage.py migrate &&
-                      python manage.py collectstatic --no-input &&
                       gunicorn svinbin.wsgi -b 0.0.0.0:8000"
 
     # command: bash -c "cd masterytest && 
