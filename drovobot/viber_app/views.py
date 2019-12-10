@@ -34,3 +34,10 @@ class ViberView(View):
         print(request.POST)
         print('Oppa')
         return HttpResponse('Hello, World!')
+
+@csrf_exempt
+def viber_view(request):
+    print(request)
+    print(request.POST)
+    print('Oppa')
+    return HttpResponse('Hello, World!')
