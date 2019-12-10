@@ -22,6 +22,11 @@ from django.http import HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
+viber = Api(BotConfiguration(
+    name='drovobot',
+    avatar='http://site.com/avatar.jpg',
+    auth_token='495624962167d356-894001973007218c-448b90921c20d990'
+))
 
 class ViberView(View):
 
@@ -39,5 +44,29 @@ class ViberView(View):
 def viber_view(request):
     print(request)
     print(request.POST)
+    print(request.headers)
     print('Oppa')
+    viber_request = viber.parse_request(request.POST)
+
+    if isinstance(viber_request, ViberMessageRequest):
+        text_message = TextMessage(text="Ты заебал! Звони сюда!")
+        message = viber_request.message
+        
+        contact = Contact(name="Bato Rinchinov",
+            phone_number="+79913693190",
+            avatar="http://link.to.avatar")
+        contact_message = ContactMessage(contact=contact)
+
+        viber.send_messages(viber_request.sender.id, [
+            text_message, contact_message
+        ])
+
+    elif isinstance(viber_request, ViberSubscribedRequest):
+        viber.send_messages(viber_request.get_user.id, [
+            TextMessage(text="thanks for subscribing!")
+        ])
+
+    elif isinstance(viber_request, ViberFailedRequest):
+        logger.warn("client failed receiving message. failure: {0}".format(viber_request))
+        
     return HttpResponse('Hello, World!')
