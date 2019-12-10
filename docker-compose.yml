@@ -32,7 +32,7 @@ services:
     #                   python manage.py migrate &&
     #                   python manage.py test product.tests.test_views"
 
-    command: bash -c "cd boudoir && 
+    command: bash -c "cd drovobot && 
                       python manage.py makemigrations --no-input &&
                       python manage.py migrate &&
                       python manage.py runserver 0.0.0.0:8000"
