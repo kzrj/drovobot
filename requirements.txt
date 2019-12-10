@@ -7,3 +7,4 @@ PyJWT
 gunicorn
 psycopg2-binary
 mixer
+viberbot

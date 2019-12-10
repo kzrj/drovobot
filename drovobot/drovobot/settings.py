@@ -41,7 +41,7 @@ DJANGO_APPS = [
 
 
 OWN_APPS = [
-
+    'viber_app.apps.ViberConfig'
 ]
 
 
