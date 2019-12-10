@@ -49,7 +49,7 @@ def viber_view(request):
     # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
     #     return Response(status=403)
 
-    viber_request = viber.parse_request(data_json)
+    viber_request = viber.parse_request(request.body)
 
 
     if isinstance(viber_request, ViberMessageRequest):
