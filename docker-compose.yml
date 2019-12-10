@@ -44,7 +44,7 @@ services:
     
     volumes:
       - .:/code
-      - ./media:/code/media
+      # - ./media:/code/media
     ports:
       - "8000"
 
