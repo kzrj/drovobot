@@ -42,10 +42,10 @@ class ViberView(View):
 
 @csrf_exempt
 def viber_view(request):
+    print(request.body)
     
-    print(request.COOKIES)
     print('Oppa')
-    data_json = json.load(request.COOKIES.decode('utf8').replace("'", '"'))
+    data_json = json.load(request.body.decode('utf8').replace("'", '"'))
     # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
     #     return Response(status=403)
 
