@@ -8,7 +8,8 @@ from viberbot.api.messages import (
         TextMessage,
         ContactMessage,
         PictureMessage,
-        VideoMessage
+        VideoMessage,
+        KeyboardMessage
     )
 from viberbot.api.messages.data_types.contact import Contact
 
