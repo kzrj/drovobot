@@ -123,7 +123,7 @@ def viber_view(request):
 
         # deactivate ad
         if viber_request.message.text == 'DEACTIVATE_AD':
-            ad = Ad.objects.filter(owner=customer).firts()
+            ad = Ad.objects.filter(owner=customer).first()
             if ad:
                 ad.active = False
                 ad.save()
