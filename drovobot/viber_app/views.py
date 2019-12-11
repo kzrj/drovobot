@@ -117,11 +117,18 @@ def viber_view(request):
 
         # create ad
         if viber_request.message.text == 'CREATE_AD':
-            ad, createdAd = Ad.objects.get_or_create(owner=customer)
-            if createdAd:
-                ad_message = TextMessage(text="Объявление создано.")
+            ad = Ad.objects.filter(owner=customer).first()
+            if ad:
+                if ad.active:
+                    ad_message = TextMessage(text="У вас уже есть объявление.")
+                else:
+                    ad.active = True
+                    ad.save()
+                    ad_message = TextMessage(text="Объявление создано.")
             else:
-                ad_message = TextMessage(text="У вас уже есть объявление.")
+                Ad.objects.create(owner=customer, active=True)
+                ad_message = TextMessage(text="Объявление создано.")
+
             viber.send_messages(viber_request.sender.id, [ ad_message ])
 
         # deactivate ad
