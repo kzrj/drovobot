@@ -3,6 +3,6 @@
 /drovobot/*/migrations/*.py
 !/drovobot/*/migrations/__init__.py
 media/
-/drovobot/postgres_data/
+postgres_data/
 *.key
 *.pem
