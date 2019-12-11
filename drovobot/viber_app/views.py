@@ -114,7 +114,7 @@ def viber_view(request):
                     [ TextMessage(text='Все объявления:') ])
             for ad in ads:
                 viber.send_messages(viber_request.sender.id, 
-                    [ TextMessage(text="Куплю дрова {}".format(str(ad))) ])
+                    [ TextMessage(text="Куплю дрова {} {}".format(str(ad), ad.owner.viber_name)) ])
 
         # create ad
         if viber_request.message.text == 'CREATE_AD':
