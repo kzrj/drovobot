@@ -34,6 +34,8 @@ viber = Api(BotConfiguration(
 ))
 
 
+# def 
+
 @csrf_exempt
 def viber_view(request):
     
@@ -58,85 +60,57 @@ def viber_view(request):
         
         if created:
             text_message = TextMessage(text="Поздравляем ты создан!")
+
+        buttons = [
+            {
+                "Columns": 2,
+                "Rows": 2,
+                "BgColor": "#e6f5ff",
+                "BgMedia": "http://link.to.button.image",
+                "BgMediaType": "picture",
+                "BgLoop": True,
+                "ActionType": "reply",
+                "ActionBody": "CREATE_AD",
+                "ReplyType": "message",
+                "Text": "Купить дрова!"
+            },
+            {
+                "Columns": 2,
+                "Rows": 2,
+                "BgColor": "#e6f5ff",
+                "BgMedia": "http://link.to.button.image",
+                "BgMediaType": "picture",
+                "BgLoop": True,
+                "ActionType": "reply",
+                "ActionBody": "DEACTIVATE_AD",
+                "ReplyType": "message",
+                "Text": "Уже купил. Убрать объявление."
+            },
+            {
+                "Columns": 2,
+                "Rows": 2,
+                "BgColor": "#e6f5ff",
+                "BgMedia": "http://link.to.button.image",
+                "BgMediaType": "picture",
+                "BgLoop": True,
+                "ActionType": "reply",
+                "ActionBody": "SHOW_ADS",
+                "ReplyType": "message",
+                "Text": "Я продаю дрова. Посмотреть объявления."
+            }
+        ]
         
         SAMPLE_KEYBOARD = {
             "Type": "keyboard",
-            "Buttons": [
-                {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "KUPIT",
-                "ReplyType": "message",
-                "Text": "Купить дрова!"
-                },
-                {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "UBRAT",
-                "ReplyType": "message",
-                "Text": "Уже купил. Убрать объявление."
-                },
-                {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "PRODAIY",
-                "ReplyType": "message",
-                "Text": "Я продаю дрова. Посмотреть объявления."
-                }
-                ]
+            "Buttons": buttons
             }
 
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
-
-        # SAMPLE_RICH_MEDIA = {
-        #   "BgColor": "#69C48A",
-        #   "Buttons": [
-        #     {
-        #       "Columns": 6,
-        #       "Rows": 1,
-        #       "BgColor": "#454545",
-        #       "BgMediaType": "gif",
-        #       "BgMedia": "http://www.url.by/test.gif",
-        #       "BgLoop": "true",
-        #       "ActionType": "open-url",
-        #       "Silent": "true",
-        #       "ActionBody": "www.tut.by",
-        #       "Image": "www.tut.by/img.jpg",
-        #       "TextVAlign": "middle",
-        #       "TextHAlign": "left",
-        #       "Text": "<b>example</b> button",
-        #       "TextOpacity": 10,
-        #       "TextSize": "regular"
-        #     }
-        #   ]
-        # }
-
-        # SAMPLE_ALT_TEXT = "upgrade now!"
-
-        # message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
-        # text_message = TextMessage(text="Ты заебал! Звони сюда!")
-        # message = viber_request.message
-        
-        # contact = Contact(name="Bato Rinchinov",
-        #     phone_number="+79913693190",
-        #     avatar="http://link.to.avatar")
-        # contact_message = ContactMessage(contact=contact)
+        # create ad 
+        if viber_request.message.text == 'SHOW_ADS':
+            ads_message = TextMessage(text="Все объявления:")
+            viber.send_messages(viber_request.sender.id, [ ads_message ])
 
         viber.send_messages(viber_request.sender.id, [
             message
