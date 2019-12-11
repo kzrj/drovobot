@@ -32,8 +32,8 @@ viber = Api(BotConfiguration(
 @csrf_exempt
 def viber_view(request):
     
-    if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
-        return HttpResponse(status=403)
+    # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
+    #     return HttpResponse(status=403)
 
     print(request.body)
     viber_request = viber.parse_request(request.body)
