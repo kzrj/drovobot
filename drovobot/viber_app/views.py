@@ -80,32 +80,32 @@ def viber_view(request):
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
 
-        SAMPLE_RICH_MEDIA = {
-          "BgColor": "#69C48A",
-          "Buttons": [
-            {
-              "Columns": 6,
-              "Rows": 1,
-              "BgColor": "#454545",
-              "BgMediaType": "gif",
-              "BgMedia": "http://www.url.by/test.gif",
-              "BgLoop": "true",
-              "ActionType": "open-url",
-              "Silent": "true",
-              "ActionBody": "www.tut.by",
-              "Image": "www.tut.by/img.jpg",
-              "TextVAlign": "middle",
-              "TextHAlign": "left",
-              "Text": "<b>example</b> button",
-              "TextOpacity": 10,
-              "TextSize": "regular"
-            }
-          ]
-        }
+        # SAMPLE_RICH_MEDIA = {
+        #   "BgColor": "#69C48A",
+        #   "Buttons": [
+        #     {
+        #       "Columns": 6,
+        #       "Rows": 1,
+        #       "BgColor": "#454545",
+        #       "BgMediaType": "gif",
+        #       "BgMedia": "http://www.url.by/test.gif",
+        #       "BgLoop": "true",
+        #       "ActionType": "open-url",
+        #       "Silent": "true",
+        #       "ActionBody": "www.tut.by",
+        #       "Image": "www.tut.by/img.jpg",
+        #       "TextVAlign": "middle",
+        #       "TextHAlign": "left",
+        #       "Text": "<b>example</b> button",
+        #       "TextOpacity": 10,
+        #       "TextSize": "regular"
+        #     }
+        #   ]
+        # }
 
-        SAMPLE_ALT_TEXT = "upgrade now!"
+        # SAMPLE_ALT_TEXT = "upgrade now!"
 
-        message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
+        # message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
         # text_message = TextMessage(text="Ты заебал! Звони сюда!")
         # message = viber_request.message
         
