@@ -28,28 +28,16 @@ viber = Api(BotConfiguration(
     auth_token='495624962167d356-894001973007218c-448b90921c20d990'
 ))
 
-class ViberView(View):
-
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('Hello, World!')
-
-    @csrf_exempt
-    def post(self, request, *args, **kwargs):
-        print(request)
-        print(request.POST)
-        print('Oppa')
-        return HttpResponse('Hello, World!')
 
 @csrf_exempt
 def viber_view(request):
-    print(request.body)
     
-    print('Oppa')
-    data_json = json.loads(request.body.decode('utf8').replace("'", '"'))
-    # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
-    #     return Response(status=403)
+    if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
+        return HttpResponse(status=403)
 
+    print(request.body)
     viber_request = viber.parse_request(request.body)
+    print(viber_request)
 
 
     if isinstance(viber_request, ViberMessageRequest):
