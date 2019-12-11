@@ -112,6 +112,9 @@ def viber_view(request):
             ads = Ad.objects.filter(active=True)
             viber.send_messages(viber_request.sender.id, 
                     [ TextMessage(text='Все объявления:') ])
+            if ads.count() == 0:
+                viber.send_messages(viber_request.sender.id, 
+                    [ TextMessage(text='нет обьявлений') ])
             for ad in ads:
                 viber.send_messages(viber_request.sender.id, 
                     [ TextMessage(text="Куплю дрова {} {}".format(str(ad), ad.owner.viber_name)) ])
