@@ -38,6 +38,7 @@ def viber_view(request):
     print(request.body)
     viber_request = viber.parse_request(request.body)
     print(viber_request)
+    
 
 
     if isinstance(viber_request, ViberMessageRequest):
