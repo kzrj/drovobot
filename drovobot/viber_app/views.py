@@ -57,7 +57,25 @@ def viber_view(request):
         if created:
             text_message = TextMessage(text="Поздравляем ты создан!")
         
+        SAMPLE_KEYBOARD = {
+            "Type": "keyboard",
+            "Buttons": [
+                {
+                "Columns": 3,
+                "Rows": 2,
+                "BgColor": "#e6f5ff",
+                "BgMedia": "http://link.to.button.image",
+                "BgMediaType": "picture",
+                "BgLoop": True,
+                "ActionType": "reply",
+                "ActionBody": "This will be sent to your bot in a callback",
+                "ReplyType": "message",
+                "Text": "Push me!"
+                }
+                ]
+            }
 
+        message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
         # text_message = TextMessage(text="Ты заебал! Звони сюда!")
         # message = viber_request.message
         
@@ -67,7 +85,7 @@ def viber_view(request):
         # contact_message = ContactMessage(contact=contact)
 
         viber.send_messages(viber_request.sender.id, [
-            text_message
+            message
         ])
 
     elif isinstance(viber_request, ViberSubscribedRequest):
