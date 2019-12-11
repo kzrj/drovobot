@@ -63,7 +63,7 @@ def viber_view(request):
             "Type": "keyboard",
             "Buttons": [
                 {
-                "Columns": 3,
+                "Columns": 2,
                 "Rows": 2,
                 "BgColor": "#e6f5ff",
                 "BgMedia": "http://link.to.button.image",
@@ -75,7 +75,7 @@ def viber_view(request):
                 "Text": "Купить дрова!"
                 },
                 {
-                "Columns": 3,
+                "Columns": 2,
                 "Rows": 2,
                 "BgColor": "#e6f5ff",
                 "BgMedia": "http://link.to.button.image",
@@ -85,6 +85,18 @@ def viber_view(request):
                 "ActionBody": "This will be sent to your bot in a callback",
                 "ReplyType": "message",
                 "Text": "Уже купил. Убрать объявление."
+                },
+                {
+                "Columns": 2,
+                "Rows": 2,
+                "BgColor": "#e6f5ff",
+                "BgMedia": "http://link.to.button.image",
+                "BgMediaType": "picture",
+                "BgLoop": True,
+                "ActionType": "reply",
+                "ActionBody": "This will be sent to your bot in a callback",
+                "ReplyType": "message",
+                "Text": "Я продаю дрова. Посмотреть объявления."
                 }
                 ]
             }
