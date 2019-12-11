@@ -16,10 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from viber_app.views import ViberView, viber_view
+from viber_app.views import viber_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('viber/', ViberView.as_view(), name='viber'),
     path('viber/', viber_view, name='viber'),
 ]
