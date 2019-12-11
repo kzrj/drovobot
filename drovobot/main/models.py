@@ -13,22 +13,22 @@ class CoreModel(models.Model):
 
 
 class Customer(CoreModel):
-	viber_id = models.CharField(max_length=100)
-	viber_name = models.CharField(max_length=100)
-	viber_avatar = models.URLField(max_length=300, null=True)
-	last_seen_at = models.DateTimeField(auto_now_add=True)
+    viber_id = models.CharField(max_length=100)
+    viber_name = models.CharField(max_length=100)
+    viber_avatar = models.URLField(max_length=300, null=True)
+    last_seen_at = models.DateTimeField(auto_now_add=True)
 
-	def __str__(self):
-		return self.viber_name
+    def __str__(self):
+        return self.viber_name
 
 
 class Ad(CoreModel):
-	owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
-	active = models.BooleanField(default=True)
-	text = models.CharField(max_length=200, null=True)
+    owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
+    active = models.BooleanField(default=True)
+    text = models.CharField(max_length=200, null=True)
 
-	def __str__(self):
-		return 'Ad {}'.format(self.pk)
+    def __str__(self):
+        return 'Ad {}'.format(self.pk)
 
 
 
