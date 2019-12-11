@@ -109,8 +109,11 @@ def viber_view(request):
 
         # show ads
         if viber_request.message.text == 'SHOW_ADS':
+            ads = Ad.objects.filter(active=True)
             ads_message = TextMessage(text="Все объявления:")
-            viber.send_messages(viber_request.sender.id, [ ads_message ])
+            for ad in ads:
+                viber.send_messages(viber_request.sender.id, 
+                    [ TextMessage(text="{}".format(str(ad))) ])
 
         # create ad
         if viber_request.message.text == 'CREATE_AD':
@@ -123,7 +126,7 @@ def viber_view(request):
 
         # deactivate ad
         if viber_request.message.text == 'DEACTIVATE_AD':
-            ad = Ad.objects.filter(owner=customer).first()
+            ad = Ad.objects.filter(owner=customer, active=True).first()
             if ad:
                 ad.active = False
                 ad.save()
