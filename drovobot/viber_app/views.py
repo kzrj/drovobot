@@ -110,7 +110,8 @@ def viber_view(request):
         # show ads
         if viber_request.message.text == 'SHOW_ADS':
             ads = Ad.objects.filter(active=True)
-            ads_message = TextMessage(text="Все объявления:")
+            viber.send_messages(viber_request.sender.id, 
+                    [ TextMessage(text='Все объявления:') ])
             for ad in ads:
                 viber.send_messages(viber_request.sender.id, 
                     [ TextMessage(text="{}".format(str(ad))) ])
