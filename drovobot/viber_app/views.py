@@ -70,7 +70,7 @@ def viber_view(request):
                 "BgMediaType": "picture",
                 "BgLoop": True,
                 "ActionType": "reply",
-                "ActionBody": "This will be sent to your bot in a callback",
+                "ActionBody": "KUPIT",
                 "ReplyType": "message",
                 "Text": "Купить дрова!"
                 },
@@ -82,7 +82,7 @@ def viber_view(request):
                 "BgMediaType": "picture",
                 "BgLoop": True,
                 "ActionType": "reply",
-                "ActionBody": "This will be sent to your bot in a callback",
+                "ActionBody": "UBRAT",
                 "ReplyType": "message",
                 "Text": "Уже купил. Убрать объявление."
                 },
@@ -94,7 +94,7 @@ def viber_view(request):
                 "BgMediaType": "picture",
                 "BgLoop": True,
                 "ActionType": "reply",
-                "ActionBody": "This will be sent to your bot in a callback",
+                "ActionBody": "PRODAIY",
                 "ReplyType": "message",
                 "Text": "Я продаю дрова. Посмотреть объявления."
                 }
