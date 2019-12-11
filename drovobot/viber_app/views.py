@@ -22,6 +22,9 @@ from django.http import HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
+from main.models import Customer
+
+
 viber = Api(BotConfiguration(
     name='drovobot',
     avatar='http://site.com/avatar.jpg',
@@ -43,17 +46,28 @@ def viber_view(request):
 
     if isinstance(viber_request, ViberMessageRequest):
         # get or create customer.
+        customer, created = Customer.objects.get_or_create(
+            viber_id=viber_request.sender.id,
+            viber_name=viber_request.sender.name,
+            viber_avatar=viber_request.sender.avatar,
+            )
 
-        text_message = TextMessage(text="Ты заебал! Звони сюда!")
+        text_message = TextMessage(text="Привет! ты уже зарегистрирован!")
+        
+        if created:
+            text_message = TextMessage(text="Поздравляем ты создан!")
+        
+
+        # text_message = TextMessage(text="Ты заебал! Звони сюда!")
         # message = viber_request.message
         
-        contact = Contact(name="Bato Rinchinov",
-            phone_number="+79913693190",
-            avatar="http://link.to.avatar")
-        contact_message = ContactMessage(contact=contact)
+        # contact = Contact(name="Bato Rinchinov",
+        #     phone_number="+79913693190",
+        #     avatar="http://link.to.avatar")
+        # contact_message = ContactMessage(contact=contact)
 
         viber.send_messages(viber_request.sender.id, [
-            text_message, contact_message
+            text_message
         ])
 
     elif isinstance(viber_request, ViberSubscribedRequest):
