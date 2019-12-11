@@ -71,7 +71,7 @@ def viber_view(request):
                 "ActionType": "reply",
                 "ActionBody": "This will be sent to your bot in a callback",
                 "ReplyType": "message",
-                "Text": "Push me!"
+                "Text": "Купить дрова!"
                 }
                 ]
             }
