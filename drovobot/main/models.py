@@ -24,7 +24,8 @@ class Customer(CoreModel):
 
 class Ad(CoreModel):
 	owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
-	active = models.BooleanField(default=True) 
+	active = models.BooleanField(default=True)
+	text = models.CharField(max_length=200, null=True)
 
 	def __str__(self):
 		return 'Ad {}'.format(self.pk)

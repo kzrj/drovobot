@@ -24,7 +24,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
-from main.models import Customer
+from main.models import Customer, Ad
 
 
 viber = Api(BotConfiguration(
@@ -107,11 +107,32 @@ def viber_view(request):
 
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
-        # create ad 
+        # show ads
         if viber_request.message.text == 'SHOW_ADS':
             ads_message = TextMessage(text="Все объявления:")
             viber.send_messages(viber_request.sender.id, [ ads_message ])
 
+        # create ad
+        if viber_request.message.text == 'CREATE_AD':
+            ad, createdAd = Ad.objects.get_or_create(owner=customer)
+            if createdAd:
+                ad_message = TextMessage(text="Объявление создано.")
+            else:
+                ad_message = TextMessage(text="У вас уже есть объявление.")
+            viber.send_messages(viber_request.sender.id, [ ad_message ])
+
+        # deactivate ad
+        if viber_request.message.text == 'DEACTIVATE_AD':
+            ad = Ad.objects.filter(owner=customer).firts()
+            if ad:
+                ad.active = False
+                ad.save()
+                ad_message = TextMessage(text="Объявление удалено.")
+            else:
+                ad_message = TextMessage(text="У вас нет объявлений.")
+            viber.send_messages(viber_request.sender.id, [ ad_message ])    
+
+        # send keyboard
         viber.send_messages(viber_request.sender.id, [
             message
         ])
