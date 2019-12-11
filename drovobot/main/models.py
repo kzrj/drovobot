@@ -13,7 +13,7 @@ class CoreModel(models.Model):
 
 
 class Customer(CoreModel):
-	viber_id = models.CharField(max_length=100, primary_key=True)
+	viber_id = models.CharField(max_length=100)
 	viber_name = models.CharField(max_length=100)
 	viber_avatar = models.URLField(max_length=300, null=True)
 	last_seen_at = models.DateTimeField(auto_now_add=True)
