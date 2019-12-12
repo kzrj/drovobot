@@ -71,61 +71,64 @@ def viber_view(request):
              send_main_keyboard = True
              viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
 
+        else:
+            message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
-        message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
-
-        # show ads
-        if viber_request.message.text == 'SHOW_ADS':
-            ads = Ad.objects.filter(active=True)
-            viber.send_messages(viber_request.sender.id, 
-                    [ TextMessage(text='Все объявления:') ])
-            if ads.count() == 0:
+            # show ads
+            if viber_request.message.text == 'SHOW_ADS':
+                ads = Ad.objects.filter(active=True)
                 viber.send_messages(viber_request.sender.id, 
-                    [ TextMessage(text='нет обьявлений') ])
-            for ad in ads:
-                viber.send_messages(viber_request.sender.id, 
-                    [ TextMessage(text="Куплю дрова {} {}".format(str(ad), ad.owner.viber_name)) ])
+                        [ TextMessage(text='Все объявления:') ])
+                if ads.count() == 0:
+                    viber.send_messages(viber_request.sender.id, 
+                        [ TextMessage(text='нет обьявлений') ])
+                for ad in ads:
+                    viber.send_messages(viber_request.sender.id, 
+                        [ TextMessage(text="Куплю дрова {} {}".format(str(ad), ad.owner.viber_name)) ])
 
-        # create ad
-        if viber_request.message.text == 'CREATE_AD':
-            ad = Ad.objects.filter(owner=customer).first()
-            if ad:
-                if ad.active:
-                    ad_message = TextMessage(text="У вас уже есть объявление.")
-                    viber.send_messages(viber_request.sender.id, [ ad_message ])
+            # create ad
+            if viber_request.message.text == 'CREATE_AD':
+                ad = Ad.objects.filter(owner=customer).first()
+                if ad:
+                    if ad.active:
+                        ad_message = TextMessage(text="У вас уже есть объявление.")
+                        viber.send_messages(viber_request.sender.id, [ ad_message ])
+                    else:
+                        # create new 
+                        viber.send_messages(viber_request.sender.id, [ 
+                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                        send_main_keyboard = False
+                        # ad.active = True
+                        # ad.save()
+                        # ad_message = TextMessage(text="Объявление создано.")
                 else:
-                    # create new 
+                    # create new
                     viber.send_messages(viber_request.sender.id, [ 
-                        TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
-
-                    # ad.active = True
-                    # ad.save()
+                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                    send_main_keyboard = False
+                    # Ad.objects.create(owner=customer, active=True)
                     # ad_message = TextMessage(text="Объявление создано.")
-            else:
-                # create new
-                viber.send_messages(viber_request.sender.id, [ 
-                        TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
-                # Ad.objects.create(owner=customer, active=True)
-                # ad_message = TextMessage(text="Объявление создано.")
 
-            # viber.send_messages(viber_request.sender.id, [ ad_message ])
+                # viber.send_messages(viber_request.sender.id, [ ad_message ])
 
-        # deactivate ad
-        if viber_request.message.text == 'DEACTIVATE_AD':
-            ad = Ad.objects.filter(owner=customer, active=True).first()
-            if ad:
-                ad.active = False
-                ad.save()
-                ad_message = TextMessage(text="Объявление удалено.")
-            else:
-                ad_message = TextMessage(text="У вас нет объявлений.")
-            viber.send_messages(viber_request.sender.id, [ ad_message ])    
+            # deactivate ad
+            if viber_request.message.text == 'DEACTIVATE_AD':
+                ad = Ad.objects.filter(owner=customer, active=True).first()
+                if ad:
+                    ad.active = False
+                    ad.save()
+                    ad_message = TextMessage(text="Объявление удалено.")
+                else:
+                    ad_message = TextMessage(text="У вас нет объявлений.")
+                viber.send_messages(viber_request.sender.id, [ ad_message ])    
 
-        # send keyboard
-        if send_main_keyboard:
-            viber.send_messages(viber_request.sender.id, [
-                message
-            ])
+            # send keyboard
+            if send_main_keyboard:
+                viber.send_messages(viber_request.sender.id, [
+                    message
+                ])
+
+
 
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
