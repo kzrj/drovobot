@@ -25,7 +25,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Customer, Ad
-from viber_app.viber_services import SAMPLE_KEYBOARD, viber_send_main_menu
+from viber_app.viber_services import viber_send_main_menu, viber_send_confirm_phone
 
 
 viber = Api(BotConfiguration(
@@ -64,6 +64,7 @@ def viber_view(request):
 
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD':
+
             customer.phone = viber_request.message.text
             customer.save()
             Ad.objects.create(owner=customer, active=True)
@@ -112,8 +113,9 @@ def viber_view(request):
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD') ])
-                    
+                            TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
+                                Проверьте правильность. Изменить телефон нельзя!",
+                             tracking_data='TRACKING_CREATE_AD') ])
 
             # deactivate ad
             if viber_request.message.text == 'DEACTIVATE_AD':
