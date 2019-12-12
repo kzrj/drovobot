@@ -73,7 +73,7 @@ def viber_view(request):
             # send main menu
             viber_send_main_menu(viber, viber_request.sender.id)
 
-        elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
+        elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
             # show ads
             if viber_request.message.text == 'SHOW_ADS':
                 ads = Ad.objects.filter(active=True)
