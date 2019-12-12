@@ -63,6 +63,7 @@ def viber_view(request):
             text_message = TextMessage(text="Поздравляем ты создан!")
 
         send_main_keyboard = True
+        entering_phone = False
 
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
@@ -87,8 +88,9 @@ def viber_view(request):
                 else:
                     # create new 
                     send_main_keyboard = False
+                    entering_phone = True
                     viber.send_messages(viber_request.sender.id, [ 
-                        TextMessage(text="Введите номер телефона.") ])
+                        TextMessage(text="Введите номер телефона.", tracking_data='OPAOPAOPAOP') ])
 
                     # ad.active = True
                     # ad.save()
