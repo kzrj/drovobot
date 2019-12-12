@@ -29,6 +29,10 @@ class Ad(CoreModel):
     text = models.CharField(max_length=200, null=True)
 
     def __str__(self):
+        return 'Куплю дрова {} {} {}'.format(self.owner.phone, self.owner.viber_name, self.active)
+
+    @property
+    def to_text(self)
         return 'Куплю дрова {} {}'.format(self.owner.phone, self.owner.viber_name)
 
 

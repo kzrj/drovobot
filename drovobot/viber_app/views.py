@@ -84,7 +84,7 @@ def viber_view(request):
                         [ TextMessage(text='нет обьявлений') ])
                 for ad in ads:
                     viber.send_messages(viber_request.sender.id, 
-                        [ TextMessage(text=str(ad)) ])
+                        [ TextMessage(text=ad.to_text) ])
                 # send main menu
                 viber_send_main_menu(viber, viber_request.sender.id)
 
@@ -103,7 +103,7 @@ def viber_view(request):
 
                         viber.send_messages(viber_request.sender.id, [ 
                             TextMessage(text="Объявление создано.", tracking_data='TRACKING_MAIN_MENU'),
-                            TextMessage(text=srt(ad), tracking_data='TRACKING_MAIN_MENU'),
+                            TextMessage(text=ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
                              ])
 
                     # send main menu
