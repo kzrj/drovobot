@@ -17,6 +17,7 @@ class Customer(CoreModel):
     viber_name = models.CharField(max_length=100)
     viber_avatar = models.URLField(max_length=300, null=True)
     last_seen_at = models.DateTimeField(auto_now_add=True)
+    phone = models.CharField(max_length=11)
 
     def __str__(self):
         return self.viber_name

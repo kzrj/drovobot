@@ -65,6 +65,13 @@ def viber_view(request):
         send_main_keyboard = True
         entering_phone = False
 
+        # check TRACKING DATA
+        if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
+             Ad.objects.create(owner=customer, active=True, phone=viber_request.message.text)
+             send_main_keyboard = True
+             viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
+
+
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
         # show ads
@@ -85,23 +92,23 @@ def viber_view(request):
             if ad:
                 if ad.active:
                     ad_message = TextMessage(text="У вас уже есть объявление.")
+                    viber.send_messages(viber_request.sender.id, [ ad_message ])
                 else:
                     # create new 
-                    send_main_keyboard = False
-                    entering_phone = True
                     viber.send_messages(viber_request.sender.id, [ 
-                        TextMessage(text="Введите номер телефона.", tracking_data='OPAOPAOPAOP') ])
+                        TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
 
                     # ad.active = True
                     # ad.save()
                     # ad_message = TextMessage(text="Объявление создано.")
             else:
                 # create new
-                send_main_keyboard = False
-                Ad.objects.create(owner=customer, active=True)
-                ad_message = TextMessage(text="Объявление создано.")
+                viber.send_messages(viber_request.sender.id, [ 
+                        TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                # Ad.objects.create(owner=customer, active=True)
+                # ad_message = TextMessage(text="Объявление создано.")
 
-            viber.send_messages(viber_request.sender.id, [ ad_message ])
+            # viber.send_messages(viber_request.sender.id, [ ad_message ])
 
         # deactivate ad
         if viber_request.message.text == 'DEACTIVATE_AD':
