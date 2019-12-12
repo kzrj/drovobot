@@ -140,7 +140,7 @@ def viber_view(request):
 
     elif isinstance(viber_request, ViberConversationStartedRequest):
         # viber_send_main_menu(viber, viber_request.user.id)
-        viber.send_messages(viber_request.get_user.id, [
+        viber.send_messages(viber_request.user.id, [
             TextMessage(text="thanks for subscribing!"),
             KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD)
         ])
