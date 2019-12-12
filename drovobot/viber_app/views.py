@@ -134,7 +134,7 @@ def viber_view(request):
                 viber.send_messages(viber_request.sender.id, [ ad_message ])
 
             # send main menu
-            viber.send_messages(viber_request.user.id, [
+            viber.send_messages(viber_request.sender.id, [
                 KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
             ])
         else:
