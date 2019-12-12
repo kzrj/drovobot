@@ -51,7 +51,7 @@ MAIN_MENU_BUTTONS = [
 
 MAIN_MENU_KEYBOARD = {
     "Type": "keyboard",
-    "Buttons": buttons
+    "Buttons": MAIN_MENU_BUTTONS
     }
 
 
