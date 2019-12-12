@@ -51,7 +51,8 @@ MAIN_MENU_BUTTONS = [
 
 MAIN_MENU_KEYBOARD = {
     "Type": "keyboard",
-    "Buttons": MAIN_MENU_BUTTONS
+    "Buttons": MAIN_MENU_BUTTONS,
+    "InputFieldState": 'hidden'
     }
 
 

@@ -61,11 +61,6 @@ def viber_view(request):
             viber_avatar=viber_request.sender.avatar,
             )
 
-        # text_message = TextMessage(text="Привет! ты уже зарегистрирован!")
-        
-        # if created:
-        #     text_message = TextMessage(text="Поздравляем ты создан!")
-
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD':
 
@@ -76,7 +71,9 @@ def viber_view(request):
             viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
             
             # send main menu
-            viber_send_main_menu(viber, viber_request.sender.id)
+            viber.send_messages(viber_request.user.id, [
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+            ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
             # show ads
@@ -91,7 +88,9 @@ def viber_view(request):
                     viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text=ad.to_text) ])
                 # send main menu
-                viber_send_main_menu(viber, viber_request.sender.id)
+                viber.send_messages(viber_request.user.id, [
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+                ])
 
             # create ad
             if viber_request.message.text == 'CREATE_AD':
@@ -112,7 +111,9 @@ def viber_view(request):
                              ])
 
                     # send main menu
-                    viber_send_main_menu(viber, viber_request.sender.id)
+                    viber.send_messages(viber_request.user.id, [
+                        KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+                    ])
 
                 else:
                     # create new
@@ -133,17 +134,18 @@ def viber_view(request):
                 viber.send_messages(viber_request.sender.id, [ ad_message ])
 
             # send main menu
-            viber_send_main_menu(viber, viber_request.sender.id)
+            viber.send_messages(viber_request.user.id, [
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+            ])
         else:
             # send main menu
-            viber_send_main_menu(viber, viber_request.sender.id) 
-
+            viber.send_messages(viber_request.user.id, [
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+            ])
 
     elif isinstance(viber_request, ViberConversationStartedRequest):
         # viber_send_main_menu(viber, viber_request.user.id)
         viber.send_messages(viber_request.user.id, [
-            # TextMessage(text="Приветствие!"),
-            # KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD),
             RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text='ALT TEXT!', min_api_version=2)
         ])
 
