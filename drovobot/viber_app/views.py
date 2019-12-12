@@ -84,8 +84,7 @@ def viber_view(request):
                         [ TextMessage(text='нет обьявлений') ])
                 for ad in ads:
                     viber.send_messages(viber_request.sender.id, 
-                        [ TextMessage(text="Куплю дрова {} {} ".format(ad.owner.phone, \
-                            ad.owner.viber_name)) ])
+                        [ TextMessage(text=str(ad)) ])
                 # send main menu
                 viber_send_main_menu(viber, viber_request.sender.id)
 
