@@ -25,6 +25,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Customer, Ad
+from viber_app.viber_services import SAMPLE_KEYBOARD
 
 
 viber = Api(BotConfiguration(
@@ -61,49 +62,7 @@ def viber_view(request):
         if created:
             text_message = TextMessage(text="Поздравляем ты создан!")
 
-        buttons = [
-            {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "CREATE_AD",
-                "ReplyType": "message",
-                "Text": "Купить дрова!"
-            },
-            {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "DEACTIVATE_AD",
-                "ReplyType": "message",
-                "Text": "Уже купил. Убрать объявление."
-            },
-            {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://link.to.button.image",
-                "BgMediaType": "picture",
-                "BgLoop": True,
-                "ActionType": "reply",
-                "ActionBody": "SHOW_ADS",
-                "ReplyType": "message",
-                "Text": "Я продаю дрова. Посмотреть объявления."
-            }
-        ]
-        
-        SAMPLE_KEYBOARD = {
-            "Type": "keyboard",
-            "Buttons": buttons
-            }
+        send_main_keyboard = True
 
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
@@ -126,10 +85,17 @@ def viber_view(request):
                 if ad.active:
                     ad_message = TextMessage(text="У вас уже есть объявление.")
                 else:
-                    ad.active = True
-                    ad.save()
-                    ad_message = TextMessage(text="Объявление создано.")
+                    # create new 
+                    send_main_keyboard = False
+                    viber.send_messages(viber_request.sender.id, [ 
+                        TextMessage(text="Введите номер.") ])
+
+                    # ad.active = True
+                    # ad.save()
+                    # ad_message = TextMessage(text="Объявление создано.")
             else:
+                # create new
+                send_main_keyboard = False
                 Ad.objects.create(owner=customer, active=True)
                 ad_message = TextMessage(text="Объявление создано.")
 
@@ -147,9 +113,10 @@ def viber_view(request):
             viber.send_messages(viber_request.sender.id, [ ad_message ])    
 
         # send keyboard
-        viber.send_messages(viber_request.sender.id, [
-            message
-        ])
+        if send_main_keyboard:
+            viber.send_messages(viber_request.sender.id, [
+                message
+            ])
 
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
