@@ -136,10 +136,10 @@ def viber_view(request):
 
 
     elif isinstance(viber_request, ViberConversationStartedRequest):
-        viber.send_messages(viber_request.get_user.id, [
+        viber.send_messages(viber_request.user.id, [
             TextMessage(text="thanks for ViberConversationStartedRequest!")
         ])
-        
+
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
             TextMessage(text="thanks for subscribing!")
