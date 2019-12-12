@@ -91,6 +91,7 @@ def viber_view(request):
             # create ad
             if viber_request.message.text == 'CREATE_AD':
                 ad = Ad.objects.filter(owner=customer).first()
+                print(Ad.objects.all())
                 if ad:
                     if ad.active:
                         ad_message = TextMessage(text="У вас уже есть объявление.")
