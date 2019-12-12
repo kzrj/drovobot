@@ -48,7 +48,7 @@ def viber_send_main_menu(viber, sender_id):
     message = KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=keyboard)
     viber.send_messages(sender_id, [ message ])
 
-def viber_send_confirm_phone(viber, sender_id)
+def viber_send_confirm_phone(viber, sender_id):
     buttons = [
         {
             "Columns": 3,
