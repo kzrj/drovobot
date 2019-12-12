@@ -57,10 +57,10 @@ def viber_view(request):
             viber_avatar=viber_request.sender.avatar,
             )
 
-        text_message = TextMessage(text="Привет! ты уже зарегистрирован!")
+        # text_message = TextMessage(text="Привет! ты уже зарегистрирован!")
         
-        if created:
-            text_message = TextMessage(text="Поздравляем ты создан!")
+        # if created:
+        #     text_message = TextMessage(text="Поздравляем ты создан!")
 
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD':
@@ -135,7 +135,11 @@ def viber_view(request):
             viber_send_main_menu(viber, viber_request.sender.id) 
 
 
-
+    elif isinstance(viber_request, ViberConversationStartedRequest):
+        viber.send_messages(viber_request.get_user.id, [
+            TextMessage(text="thanks for ViberConversationStartedRequest!")
+        ])
+        
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
             TextMessage(text="thanks for subscribing!")
