@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+from viberbot.api.messages import (
+        TextMessage,
+        ContactMessage,
+        PictureMessage,
+        VideoMessage,
+        KeyboardMessage,
+        RichMediaMessage
+    )
 
 def viber_send_main_menu(viber, sender_id):
     buttons = [
