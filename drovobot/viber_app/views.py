@@ -128,8 +128,8 @@ def viber_view(request):
                     ad_message = TextMessage(text="У вас нет объявлений.")
                 viber.send_messages(viber_request.sender.id, [ ad_message ])
 
-                # send main menu
-                viber_send_main_menu(viber, viber_request.sender.id)
+            # send main menu
+            viber_send_main_menu(viber, viber_request.sender.id)
         else:
             # send main menu
             viber_send_main_menu(viber, viber_request.sender.id) 
