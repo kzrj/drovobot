@@ -64,7 +64,7 @@ def viber_view(request):
 
         send_main_keyboard = True
 
-        menu_keyboard = {
+        form = {
             "Type": "rich_media",
             "ButtonsGroupColumns": 6,
             "ButtonsGroupRows": 6,
@@ -96,7 +96,7 @@ def viber_view(request):
             ]
         }
         viber.send_messages(viber_request.sender.id, [
-            RichMediaMessage(rich_media=form, min_api_version=2, keyboard=menu_keyboard)
+            RichMediaMessage(rich_media=form, min_api_version=2, keyboard=SAMPLE_KEYBOARD)
             ])
 
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
