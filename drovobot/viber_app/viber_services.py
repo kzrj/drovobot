@@ -91,3 +91,27 @@ def viber_send_confirm_phone(viber, sender_id):
 
     message = KeyboardMessage(tracking_data='CHECK_PHONE', keyboard=keyboard)
     viber.send_messages(sender_id, [ message ])
+
+def viber_send_start(viber, sender_id):
+    buttons = [
+        {
+            "Columns": 6,
+            "Rows": 2,
+            "BgColor": "#e6f5ff",
+            "BgMedia": "http://link.to.button.image",
+            "BgMediaType": "picture",
+            "BgLoop": True,
+            "ActionType": "reply",
+            "ActionBody": "",
+            "ReplyType": "message",
+            "Text": "МЕНЮ"
+        },
+    ]
+            
+    keyboard = {
+        "Type": "keyboard",
+        "Buttons": buttons
+        }
+
+    message = KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=keyboard)
+    viber.send_messages(sender_id, [ message ])
