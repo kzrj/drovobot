@@ -63,7 +63,7 @@ def viber_view(request):
             text_message = TextMessage(text="Поздравляем ты создан!")
 
         # check TRACKING DATA
-        if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
+        if viber_request.message.tracking_data == 'TRACKING_CREATE_AD':
             customer.phone = viber_request.message.text
             customer.save()
             Ad.objects.create(owner=customer, active=True)
@@ -112,7 +112,7 @@ def viber_view(request):
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD') ])
                     
 
             # deactivate ad
@@ -142,4 +142,4 @@ def viber_view(request):
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warn("client failed receiving message. failure: {0}".format(viber_request))
 
-    return HttpResponse('Hello, World!')
+    return HttpResponse('viber client only')
