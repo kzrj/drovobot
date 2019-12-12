@@ -67,9 +67,11 @@ def viber_view(request):
 
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
-             Ad.objects.create(owner=customer, active=True, phone=viber_request.message.text)
-             send_main_keyboard = True
-             viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
+            customer.phone = viber_request.message.text
+            customer.save()
+            Ad.objects.create(owner=customer, active=True)
+            send_main_keyboard = True
+            viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
 
         else:
             message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
@@ -84,7 +86,8 @@ def viber_view(request):
                         [ TextMessage(text='нет обьявлений') ])
                 for ad in ads:
                     viber.send_messages(viber_request.sender.id, 
-                        [ TextMessage(text="Куплю дрова {} {}".format(str(ad), ad.owner.viber_name)) ])
+                        [ TextMessage(text="Куплю дрова {} {} ".format(ad.owner.phone, \
+                            ad.owner.viber_name)) ])
 
             # create ad
             if viber_request.message.text == 'CREATE_AD':
