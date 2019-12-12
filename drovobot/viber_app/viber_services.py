@@ -76,6 +76,6 @@ form = {
                 }
             ]
         }
-        viber.send_messages(viber_request.sender.id, [
-            RichMediaMessage(rich_media=form, min_api_version=2, keyboard=SAMPLE_KEYBOARD)
-            ])
+# viber.send_messages(viber_request.sender.id, [
+#     RichMediaMessage(rich_media=form, min_api_version=2, keyboard=SAMPLE_KEYBOARD)
+#     ])
