@@ -32,7 +32,7 @@ class Ad(CoreModel):
         return 'Куплю дрова {} {} {}'.format(self.owner.phone, self.owner.viber_name, self.active)
 
     @property
-    def to_text(self)
+    def to_text(self):
         return 'Куплю дрова {} {}'.format(self.owner.phone, self.owner.viber_name)
 
 
