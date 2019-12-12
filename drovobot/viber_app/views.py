@@ -100,9 +100,15 @@ def viber_view(request):
                         # create new 
                         ad.active = True
                         ad.save()
+
                         viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Объявление создано.", tracking_data='TRACKING_MAIN_MENU') ])
-                        
+                            TextMessage(text="Объявление создано.", tracking_data='TRACKING_MAIN_MENU'),
+                            TextMessage(text=srt(ad), tracking_data='TRACKING_MAIN_MENU'),
+                             ])
+
+                    # send main menu
+                    viber_send_main_menu(viber, viber_request.sender.id)
+
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
