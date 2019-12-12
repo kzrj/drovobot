@@ -144,7 +144,7 @@ def viber_view(request):
         viber.send_messages(viber_request.user.id, [
             # TextMessage(text="Приветствие!"),
             # KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD),
-            RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text='ALT TEXT!', min_api=2)
+            RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text='ALT TEXT!', min_api_version=2)
         ])
 
     elif isinstance(viber_request, ViberSubscribedRequest):
