@@ -64,6 +64,41 @@ def viber_view(request):
 
         send_main_keyboard = True
 
+        menu_keyboard = {
+            "Type": "rich_media",
+            "ButtonsGroupColumns": 6,
+            "ButtonsGroupRows": 6,
+            "BgColor": "#E6E6FA",
+            "Buttons": [
+                {
+                "Columns": 6,
+                "Rows": 5,
+                "BgColor": "#FFFFFF",
+                "Text": '<font color="#545265">В любой момент можете задать интересующий Вас вопрос, просто написав его в этот чат. Чтобы еще раз вызвать это меню просто напишите в чат "меню" или нажмите 👇</font>',
+                "TextSize": "medium",
+                "TextVAlign": "middle",
+                "TextHAlign": "middle",
+                "ActionType": None,
+                "ActionBody": "",
+                "Silent": True
+                },
+                {
+                "Columns": 6,
+                "Rows": 1,
+                "BgColor": "#E6E6FA",
+                "Text": '<font color="#545265"><b>Меню</b></font>',
+                "TextSize": "medium",
+                "TextVAlign": "middle",
+                "TextHAlign": "middle",
+                "ActionType": 'reply',
+                "ActionBody": "Меню",
+                }
+            ]
+        }
+        viber.send_messages(viber_id, [
+            RichMediaMessage(rich_media=form, min_api_version=2, keyboard=menu_keyboard)
+            ])
+
         message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
 
         # show ads
