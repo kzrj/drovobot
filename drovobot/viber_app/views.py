@@ -95,7 +95,7 @@ def viber_view(request):
                 }
             ]
         }
-        viber.send_messages(viber_id, [
+        viber.send_messages(viber_request.sender.id, [
             RichMediaMessage(rich_media=form, min_api_version=2, keyboard=menu_keyboard)
             ])
 
