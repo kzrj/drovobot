@@ -25,7 +25,7 @@ from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Customer, Ad
-from viber_app.viber_services import SAMPLE_KEYBOARD
+from viber_app.viber_services import SAMPLE_KEYBOARD, viber_send_main_menu
 
 
 viber = Api(BotConfiguration(
@@ -62,9 +62,6 @@ def viber_view(request):
         if created:
             text_message = TextMessage(text="Поздравляем ты создан!")
 
-        send_main_keyboard = True
-        entering_phone = False
-
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             customer.phone = viber_request.message.text
@@ -72,10 +69,11 @@ def viber_view(request):
             Ad.objects.create(owner=customer, active=True)
             send_main_keyboard = True
             viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
+            
+            # send main menu
+            viber_send_main_menu(viber, viber_request.sender.id)
 
         else:
-            message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
-
             # show ads
             if viber_request.message.text == 'SHOW_ADS':
                 ads = Ad.objects.filter(active=True)
@@ -88,6 +86,8 @@ def viber_view(request):
                     viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text="Куплю дрова {} {} ".format(ad.owner.phone, \
                             ad.owner.viber_name)) ])
+                # send main menu
+                viber_send_main_menu(viber, viber_request.sender.id)
 
             # create ad
             if viber_request.message.text == 'CREATE_AD':
@@ -98,21 +98,16 @@ def viber_view(request):
                         viber.send_messages(viber_request.sender.id, [ ad_message ])
                     else:
                         # create new 
+                        ad.active = True
+                        ad.save()
                         viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
-                        send_main_keyboard = False
-                        # ad.active = True
-                        # ad.save()
-                        # ad_message = TextMessage(text="Объявление создано.")
+                            TextMessage(text="Объявление создано.", tracking_data='TRACKING_MAIN_MENU') ])
+                        
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
                             TextMessage(text="Введите номер телефона.", tracking_data='TRACKING_CREATE_AD_PHONE') ])
-                    send_main_keyboard = False
-                    # Ad.objects.create(owner=customer, active=True)
-                    # ad_message = TextMessage(text="Объявление создано.")
-
-                # viber.send_messages(viber_request.sender.id, [ ad_message ])
+                    
 
             # deactivate ad
             if viber_request.message.text == 'DEACTIVATE_AD':
@@ -123,13 +118,10 @@ def viber_view(request):
                     ad_message = TextMessage(text="Объявление удалено.")
                 else:
                     ad_message = TextMessage(text="У вас нет объявлений.")
-                viber.send_messages(viber_request.sender.id, [ ad_message ])    
+                viber.send_messages(viber_request.sender.id, [ ad_message ])
 
-            # send keyboard
-            if send_main_keyboard:
-                viber.send_messages(viber_request.sender.id, [
-                    message
-                ])
+                # send main menu
+                viber_send_main_menu(viber, viber_request.sender.id) 
 
 
 

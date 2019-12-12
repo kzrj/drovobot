@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+
+from viberbot.api.messages import (
+        TextMessage,
+        ContactMessage,
+        PictureMessage,
+        VideoMessage,
+        KeyboardMessage,
+        RichMediaMessage
+    )
+from viberbot.api.messages.data_types.contact import Contact
+
 
 buttons = [
     {
@@ -43,7 +55,7 @@ SAMPLE_KEYBOARD = {
     "Buttons": buttons
     }
 
-    
+
 # rich media
 form = {
             "Type": "rich_media",
@@ -79,3 +91,7 @@ form = {
 # viber.send_messages(viber_request.sender.id, [
 #     RichMediaMessage(rich_media=form, min_api_version=2, keyboard=SAMPLE_KEYBOARD)
 #     ])
+
+def viber_send_main_menu(viber, sender_id):
+	message = KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=SAMPLE_KEYBOARD)
+	viber.send_messages(sender_id, [ message ])
