@@ -139,7 +139,7 @@ def viber_view(request):
         # viber.send_messages(viber_request.user.id, [
         #     TextMessage(text="Привет! Это дровобот :) \n Намжите МЕНЮ!")
         # ])
-        viber_send_start(viber, viber_request.user.id)
+        viber_send_main_menu(viber, viber_request.user.id)
 
     elif isinstance(viber_request, ViberSubscribedRequest):
         viber.send_messages(viber_request.get_user.id, [
