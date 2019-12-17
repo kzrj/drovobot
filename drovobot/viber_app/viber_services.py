@@ -58,11 +58,10 @@ MAIN_MENU_KEYBOARD = {
 
 
 SAMPLE_RICH_MEDIA = {
-  "BgColor": "#69C48A",
   "Buttons": [
     {
         "Columns":6,
-        "Rows":6,
+        "Rows":4,
         "Text":"<font color=#323232><b>Дровобот!</b></font> \
             <font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>",
         "ActionType":"none",
