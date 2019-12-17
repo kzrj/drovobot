@@ -28,7 +28,7 @@ from main.models import Customer, Ad
 from viber_app.viber_services import (
     viber_send_main_menu, viber_send_confirm_phone, viber_send_start,
     MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD,
-    SAMPLE_RICH_MEDIA
+    SAMPLE_RICH_MEDIA, SAMPLE_RICH_MEDIA2
     )
 
 
@@ -89,7 +89,8 @@ def viber_view(request):
                         [ TextMessage(text=ad.to_text) ])
                 # send main menu
                 viber.send_messages(viber_request.sender.id, [
-                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),
+                    RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA2, alt_text='ALT TEXT!', min_api_version=3)        
                 ])
 
             # create ad

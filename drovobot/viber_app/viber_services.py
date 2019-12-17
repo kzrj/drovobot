@@ -75,12 +75,11 @@ SAMPLE_RICH_MEDIA = {
     {
         "Columns": 6,
         "Rows": 2,
-        "BgColor": "#CB6F1F",
         "BgLoop": "true",
         "ActionType": "reply",
         "Silent": "true",
         "ActionBody": "Welcome",
-        "Text": "<b>СТАРТ!</b> button",
+        "Text": "<b>СТАРТ!</b>",
         "TextOpacity": 10,
         "TextSize":"large",
         "TextVAlign":"middle",
@@ -96,10 +95,9 @@ SAMPLE_RICH_MEDIA2 = {
         "Columns":6,
         "Rows":2,
         "Text":"<font color=#323232><b>\
-            Дровобот!</b></font>\
-            <font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>",
+            Кнопка</b></font>\
+            <font color=#777777><br>Share phone </font><font color=#6fc133>$17.99</font>",
         "ActionType":"share-phone",
-        "ActionBody":"https://www.google.com",
         "TextSize":"medium",
         "TextVAlign":"middle",
         "TextHAlign":"left"
@@ -107,12 +105,11 @@ SAMPLE_RICH_MEDIA2 = {
     {
         "Columns": 6,
         "Rows": 2,
-        "BgColor": "#CB6F1F",
         "BgLoop": "true",
         "ActionType": "reply",
         "Silent": "true",
         "ActionBody": "Welcome",
-        "Text": "<b>СТАРТ!</b> button",
+        "Text": "<b>СТАРТ!</b>",
         "TextOpacity": 10,
         "TextSize":"large",
         "TextVAlign":"middle",
