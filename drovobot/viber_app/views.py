@@ -95,7 +95,6 @@ def viber_view(request):
             # create ad
             if viber_request.message.text == 'CREATE_AD':
                 ad = Ad.objects.filter(owner=customer).first()
-                print(Ad.objects.all())
                 if ad:
                     if ad.active:
                         ad_message = TextMessage(text="У вас уже есть объявление.")
@@ -131,12 +130,13 @@ def viber_view(request):
                     ad_message = TextMessage(text="Объявление удалено.")
                 else:
                     ad_message = TextMessage(text="У вас нет объявлений.")
-                viber.send_messages(viber_request.sender.id, [ ad_message ])
+                viber.send_messages(viber_request.sender.id, [ ad_message,
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6) ])
 
-            # send main menu
-            viber.send_messages(viber_request.sender.id, [
-                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
-            ])
+            # # send main menu
+            # viber.send_messages(viber_request.sender.id, [
+            #     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+            # ])
         else:
             # send main menu
             viber.send_messages(viber_request.sender.id, [
