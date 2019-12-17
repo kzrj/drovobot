@@ -46,7 +46,7 @@ def viber_view(request):
     
     # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
     #     return HttpResponse(status=403)
-
+    print('Request ___________________________________________!')
     print(request.body)
     viber_request = viber.parse_request(request.body)
     print(viber_request)
@@ -90,7 +90,7 @@ def viber_view(request):
                 # send main menu
                 viber.send_messages(viber_request.sender.id, [
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),
-                    RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA2, alt_text='ALT TEXT!', min_api_version=3)        
+                    RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA2, alt_text='ALT TEXT!', min_api_version=6)        
                 ])
 
             # create ad
