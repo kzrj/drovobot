@@ -62,9 +62,8 @@ SAMPLE_RICH_MEDIA = {
   "Buttons": [
     {
         "Columns":6,
-        "Rows":2,
-        "Text":"<font color=#323232><b>\
-            Дровобот!</b></font>\
+        "Rows":13,
+        "Text":"<font color=#323232><b>Дровобот!</b></font>\
             <font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>",
         "ActionType":"none",
         "ActionBody":"https://www.google.com",
@@ -79,7 +78,7 @@ SAMPLE_RICH_MEDIA = {
         "ActionType": "reply",
         "Silent": "true",
         "ActionBody": "Welcome",
-        "Text": "<b>СТАРТ!</b>",
+        "Text": "<font color=#323232><b>СТАРТ!</b></font>",
         "TextOpacity": 10,
         "TextSize":"large",
         "TextVAlign":"middle",
