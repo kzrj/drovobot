@@ -61,21 +61,30 @@ SAMPLE_RICH_MEDIA = {
   "BgColor": "#69C48A",
   "Buttons": [
     {
-      "Columns": 6,
-      "Rows": 1,
-      "BgColor": "#454545",
-      "BgMediaType": "gif",
-      "BgMedia": "http://www.url.by/test.gif",
-      "BgLoop": "true",
-      "ActionType": "open-url",
-      "Silent": "true",
-      "ActionBody": "www.tut.by",
-      "Image": "www.tut.by/img.jpg",
-      "TextVAlign": "middle",
-      "TextHAlign": "left",
-      "Text": "<b>example</b> button",
-      "TextOpacity": 10,
-      "TextSize": "regular"
+        "Columns":6,
+        "Rows":2,
+        "Text":"<font color=#323232><b>\
+            Дровобот!</b></font>\
+            <font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>",
+        "ActionType":"share-phone",
+        "ActionBody":"https://www.google.com",
+        "TextSize":"medium",
+        "TextVAlign":"middle",
+        "TextHAlign":"left"
+    },
+    {
+        "Columns": 6,
+        "Rows": 2,
+        "BgColor": "#CB6F1F",
+        "BgLoop": "true",
+        "ActionType": "reply",
+        "Silent": "true",
+        "ActionBody": "Welcome",
+        "Text": "<b>СТАРТ!</b> button",
+        "TextOpacity": 10,
+        "TextSize":"large",
+        "TextVAlign":"middle",
+        "TextHAlign":"middle",
     }
   ]
 }
