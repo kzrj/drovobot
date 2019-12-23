@@ -161,7 +161,7 @@ CREATE_AD_AMOUNT_BUTTONS = [
         "TextHAlign": "center",
         "TextVAlign": "middle",
         "ActionType": "reply",
-        "ActionBody": "2-4",
+        "ActionBody": "от 2 до 4 т.р.",
         "BgColor": "#f7bb3f",
         "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
     }, {
@@ -172,7 +172,7 @@ CREATE_AD_AMOUNT_BUTTONS = [
         "TextHAlign": "center",
         "TextVAlign": "middle",
         "ActionType": "reply",
-        "ActionBody": "4-6",
+        "ActionBody": "от 4 до 6 т.р.",
         "BgColor": "#7eceea",
         "Image": "https://s18.postimg.org/ntpef5syd/french.png"
     }, {
@@ -183,7 +183,7 @@ CREATE_AD_AMOUNT_BUTTONS = [
         "TextHAlign": "center",
         "TextVAlign": "middle",
         "ActionType": "reply",
-        "ActionBody": "6-8",
+        "ActionBody": "от 6 до 8 т.р.",
         "BgColor": "#f6f7f9",
         "Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
     }, {
@@ -194,7 +194,7 @@ CREATE_AD_AMOUNT_BUTTONS = [
         "TextHAlign": "center",
         "TextVAlign": "middle",
         "ActionType": "reply",
-        "ActionBody": "8+",
+        "ActionBody": "от 8 т.р. и выше",
         "BgColor": "#dd8157",
         "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
     }

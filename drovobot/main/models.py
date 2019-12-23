@@ -32,8 +32,8 @@ class Ad(CoreModel):
         ('Железнодорожный район', 'Железнодорожный район'), ('Октябрьский район', 'Октябрьский район'),
         ('Вахмистрово', 'Вахмистрово')]
 
-    AMOUNTS = [('2-4', 'от 2 до 4 т.р.'), ('4-6', 'от 4 до 6 т.р.'),
-        ('6-8', 'от 6 до 8 т.р.'), ('8+', 'от 8 т.р. и выше'),
+    AMOUNTS = [('от 2 до 4 т.р.', 'от 2 до 4 т.р.'), ('от 4 до 6 т.р.', 'от 4 до 6 т.р.'),
+        ('от 6 до 8 т.р.', 'от 6 до 8 т.р.'), ('от 8 т.р. и выше', 'от 8 т.р. и выше'),
         ('8/7', '8/7')]
 
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
@@ -42,11 +42,11 @@ class Ad(CoreModel):
     amount = models.CharField(max_length=200, null=True, choices=AMOUNTS)
 
     def __str__(self):
-        return f'Куплю дрова за {self.amount}, привезти в {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} с доставкой в {self.location} т. {self.owner.phone}'
 
     @property
     def to_text(self):
-        return f'Куплю дрова за {self.amount}, привезти в {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} с доставкой в {self.location} т. {self.owner.phone}'
 
 
 

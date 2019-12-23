@@ -92,7 +92,7 @@ def viber_view(request):
             viber.send_messages(viber_request.sender.id, [ 
                             TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
                                 Проверьте правильность. Изменить телефон нельзя!",
-                             tracking_data='TRACKING_CREATE_AD') ])
+                             tracking_data='TRACKING_CREATE_AD_PHONE') ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             # save location
