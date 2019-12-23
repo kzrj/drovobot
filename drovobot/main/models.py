@@ -30,7 +30,7 @@ class Customer(CoreModel):
 class Ad(CoreModel):
     LOCATIONS = [('Левый берег', 'Левый берег'), ('Советский район', 'Советский район'),
         ('Железнодорожный район', 'Железнодорожный район'), ('Октябрьский район', 'Октябрьский район'),
-        ('Вахмистрово', 'Вахмистрово')]
+        ('в районе Вахмистрово', 'в районе Вахмистрово')]
 
     AMOUNTS = [('от 2 до 4 т.р.', 'от 2 до 4 т.р.'), ('от 4 до 6 т.р.', 'от 4 до 6 т.р.'),
         ('от 6 до 8 т.р.', 'от 6 до 8 т.р.'), ('от 8 т.р. и выше', 'от 8 т.р. и выше'),
@@ -42,11 +42,11 @@ class Ad(CoreModel):
     amount = models.CharField(max_length=200, null=True, choices=AMOUNTS)
 
     def __str__(self):
-        return f'Куплю дрова {self.amount} с доставкой в {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount}. {self.location} т. {self.owner.phone}'
 
     @property
     def to_text(self):
-        return f'Куплю дрова {self.amount} с доставкой в {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount}. {self.location} т. {self.owner.phone}'
 
 
 
