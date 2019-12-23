@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from main.models import Customer, Ad
 from viber_app.viber_services import (
     viber_send_main_menu, viber_send_confirm_phone, viber_send_start,
-    MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION, CREATE_AD_AMOUNT_KEYBOARD,
+    MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION_KEYBOARD, CREATE_AD_AMOUNT_KEYBOARD,
     SAMPLE_RICH_MEDIA, SAMPLE_RICH_MEDIA2
     )
 
