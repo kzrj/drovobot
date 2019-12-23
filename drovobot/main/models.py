@@ -42,11 +42,11 @@ class Ad(CoreModel):
     amount = models.CharField(max_length=200, null=True, choices=AMOUNTS)
 
     def __str__(self):
-        return f'Куплю дрова {self.amount}. {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'
 
     @property
     def to_text(self):
-        return f'Куплю дрова {self.amount}. {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'
 
 
 

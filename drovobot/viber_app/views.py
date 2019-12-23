@@ -51,8 +51,6 @@ def viber_view(request):
     viber_request = viber.parse_request(request.body)
     print(viber_request)
 
-
-
     if isinstance(viber_request, ViberMessageRequest):
         # get or create customer.
         customer, created = Customer.objects.get_or_create(
@@ -132,7 +130,7 @@ def viber_view(request):
 
             # create ad
             if viber_request.message.text == 'CREATE_AD':
-                ad = Ad.objects.filter(owner=customer).first()
+                ad = customer.get_ad
                 if ad:
                     if ad.active:
                         ad_message = TextMessage(text="У вас уже есть объявление.")
@@ -140,14 +138,14 @@ def viber_view(request):
                         # CHANGE AD
 
                     else:
-                        # create new 
-                        ad.active = True
-                        ad.save()
-
+                        # continue creating or change
+                        
                         viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Объявление создано.", tracking_data='TRACKING_MAIN_MENU'),
-                            TextMessage(text=ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
-                             ])
+                            TextMessage(text="Укажите в какой район привезти дрова:",
+                                 tracking_data='TRACKING_CREATE_AD_LOCATION'),
+                            KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
+                             keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
+                                  ])
 
                     # send main menu
                     viber.send_messages(viber_request.sender.id, [
