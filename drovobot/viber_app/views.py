@@ -149,7 +149,7 @@ def viber_view(request):
                     viber.send_messages(viber_request.sender.id, [ 
                         TextMessage(text="Укажите в какой район привезти дрова:",
                              tracking_data='TRACKING_CREATE_AD_LOCATION'),
-                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
+                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
                          keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
                               ])
                     # viber.send_messages(viber_request.sender.id, [ 
