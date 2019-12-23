@@ -86,14 +86,6 @@ SAMPLE_RICH_MEDIA = {
 
 # CREATE AD
 # CREATE AD LOCATION
-CREATE_AD_LOCATION_KEYBOARD = {
-    "Type": "keyboard",
-    "Buttons": CREATE_AD_LOCATION_BUTTONS,
-    "InputFieldState": 'hidden'
-    }
-
-
-
 CREATE_AD_LOCATION_BUTTONS = {
   "Buttons": [{
         "Columns": 2,
@@ -153,15 +145,13 @@ CREATE_AD_LOCATION_BUTTONS = {
     }, ]
 }
 
-# CREATE AD AMOUNT
-CREATE_AD_AMOUNT_KEYBOARD = {
+CREATE_AD_LOCATION_KEYBOARD = {
     "Type": "keyboard",
-    "Buttons": CREATE_AD_AMOUNT_BUTTONS,
+    "Buttons": CREATE_AD_LOCATION_BUTTONS,
     "InputFieldState": 'hidden'
     }
 
-
-
+# CREATE AD AMOUNT
 CREATE_AD_AMOUNT_BUTTONS = {
   "Buttons": [{
         "Columns": 2,
@@ -210,6 +200,14 @@ CREATE_AD_AMOUNT_BUTTONS = {
     }]
 }
 
+CREATE_AD_AMOUNT_KEYBOARD = {
+    "Type": "keyboard",
+    "Buttons": CREATE_AD_AMOUNT_BUTTONS,
+    "InputFieldState": 'hidden'
+    }
+
+
+# XZ
 SAMPLE_RICH_MEDIA2 = {
   "BgColor": "#69C48A",
   "Buttons": [
