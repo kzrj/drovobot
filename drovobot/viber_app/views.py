@@ -99,13 +99,15 @@ def viber_view(request):
             print('TRACKING_CREATE_AD_PHONE')
             print(viber_request.message.text)
 
+            # TODO: Check phone
+
             customer.phone = viber_request.message.text
             customer.save()
            
             # send choose amount
             viber.send_messages(viber_request.sender.id, [
                 TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
-                TextMessage(text=ad.to_text, tracking_data='TRACKING_MAIN_MENU'),        
+                TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),        
             ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
