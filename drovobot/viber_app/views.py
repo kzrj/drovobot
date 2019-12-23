@@ -75,7 +75,9 @@ def viber_view(request):
             
             # send choose location
             viber.send_messages(viber_request.sender.id, [
-                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT', keyboard=CREATE_AD_LOCATION_KEYBOARD,
+                TextMessage(text="Укажите на какую сумму:",
+                             tracking_data='TRACKING_CREATE_AD_AMOUNT')
+                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT', keyboard=CREATE_AD_AMOUNT_KEYBOARD,
                  min_api_version=6),        
             ])
 
