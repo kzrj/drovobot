@@ -107,7 +107,9 @@ def viber_view(request):
             # send choose amount
             viber.send_messages(viber_request.sender.id, [
                 TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
-                TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),        
+                TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6),        
             ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
@@ -124,7 +126,8 @@ def viber_view(request):
                         [ TextMessage(text=ad.to_text) ])
                 # send main menu
                 viber.send_messages(viber_request.sender.id, [
-                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6),
                 ])
 
             # create ad
