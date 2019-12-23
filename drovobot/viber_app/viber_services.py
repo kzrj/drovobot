@@ -74,13 +74,140 @@ SAMPLE_RICH_MEDIA = {
         "Columns": 6,
         "Rows": 2,
         "ActionType": "reply",
-        "ActionBody": "Welcome",
+        "ActionBody": "START",
         "Text": "<font color=#323232><b>СТАРТ!</b></font>",
         "TextSize":"large",
         "TextVAlign":"middle",
         "TextHAlign":"middle",
     }
   ]
+}
+
+
+# CREATE AD
+# CREATE AD LOCATION
+CREATE_AD_LOCATION_KEYBOARD = {
+    "Type": "keyboard",
+    "Buttons": CREATE_AD_LOCATION_BUTTONS,
+    "InputFieldState": 'hidden'
+    }
+
+
+
+CREATE_AD_LOCATION_BUTTONS = {
+  "Buttons": [{
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>Левый берег</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "Левый берег",
+        "BgColor": "#f7bb3f",
+        "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>Советский район</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "Советский район",
+        "BgColor": "#7eceea",
+        "Image": "https://s18.postimg.org/ntpef5syd/french.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>Железнодорожный район</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "Железнодорожный район",
+        "BgColor": "#f6f7f9",
+        "Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>Октябрьский район</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "Октябрьский район",
+        "BgColor": "#dd8157",
+        "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>Вахмистрово</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "Вахмистрово",
+        "BgColor": "#f6f7f9",
+        "Image": "https://s18.postimg.org/wq06j3jkl/indi.png"
+    }, ]
+}
+
+# CREATE AD AMOUNT
+CREATE_AD_AMOUNT_KEYBOARD = {
+    "Type": "keyboard",
+    "Buttons": CREATE_AD_AMOUNT_BUTTONS,
+    "InputFieldState": 'hidden'
+    }
+
+
+
+CREATE_AD_AMOUNT_BUTTONS = {
+  "Buttons": [{
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>от 2 до 4 т.р.</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "2-4",
+        "BgColor": "#f7bb3f",
+        "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>от 4 до 6 т.р.</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "4-6",
+        "BgColor": "#7eceea",
+        "Image": "https://s18.postimg.org/ntpef5syd/french.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>от 6 до 8 т.р.</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "6-8",
+        "BgColor": "#f6f7f9",
+        "Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=\"#494E67\"><b>от 8 т.р. и выше</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "8+",
+        "BgColor": "#dd8157",
+        "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
+    }]
 }
 
 SAMPLE_RICH_MEDIA2 = {

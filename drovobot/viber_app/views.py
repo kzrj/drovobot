@@ -27,7 +27,7 @@ from django.views.decorators.csrf import csrf_exempt
 from main.models import Customer, Ad
 from viber_app.viber_services import (
     viber_send_main_menu, viber_send_confirm_phone, viber_send_start,
-    MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD,
+    MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION, CREATE_AD_AMOUNT_KEYBOARD,
     SAMPLE_RICH_MEDIA, SAMPLE_RICH_MEDIA2
     )
 
@@ -62,17 +62,45 @@ def viber_view(request):
             )
 
         # check TRACKING DATA
-        if viber_request.message.tracking_data == 'TRACKING_CREATE_AD':
+        if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_LOCATION':
 
-            customer.phone = viber_request.message.text
-            customer.save()
-            Ad.objects.create(owner=customer, active=True)
-            send_main_keyboard = True
-            viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
+            print('TRACKING_CREATE_AD_LOCATION')
+            print(viber_request.message.text)
             
-            # send main menu
+            # customer.phone = viber_request.message.text
+            # customer.save()
+            # Ad.objects.create(owner=customer, active=True)
+            # send_main_keyboard = True
+            # viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
+            
+            # send choose location
             viber.send_messages(viber_request.sender.id, [
-                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT', keyboard=CREATE_AD_LOCATION_KEYBOARD,
+                 min_api_version=6),        
+            ])
+
+        elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
+            # save location
+            ad = Ad.objects.filter(owner=customer).first()
+            print('TRACKING_CREATE_AD_LOCATION')
+            print(viber_request.message.text)
+           
+            # send choose amount
+            viber.send_messages(viber_request.sender.id, [ 
+                            TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
+                                Проверьте правильность. Изменить телефон нельзя!",
+                             tracking_data='TRACKING_CREATE_AD') ])
+
+        elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
+            # save location
+            ad = Ad.objects.filter(owner=customer).first()
+            print('TRACKING_CREATE_AD_PHONE')
+            print(viber_request.message.text)
+           
+            # send choose amount
+            viber.send_messages(viber_request.sender.id, [
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                 min_api_version=6),        
             ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
@@ -99,6 +127,8 @@ def viber_view(request):
                     if ad.active:
                         ad_message = TextMessage(text="У вас уже есть объявление.")
                         viber.send_messages(viber_request.sender.id, [ ad_message ])
+                        # CHANGE AD
+
                     else:
                         # create new 
                         ad.active = True
@@ -117,9 +147,12 @@ def viber_view(request):
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
-                                Проверьте правильность. Изменить телефон нельзя!",
-                             tracking_data='TRACKING_CREATE_AD') ])
+                            TextMessage(text="Укажите в какой район привезти дрова:",
+                             tracking_data='TRACKING_CREATE_AD_LOCATION') ])
+                    # viber.send_messages(viber_request.sender.id, [ 
+                    #         TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
+                    #             Проверьте правильность. Изменить телефон нельзя!",
+                    #          tracking_data='TRACKING_CREATE_AD') ])
 
             # deactivate ad
             if viber_request.message.text == 'DEACTIVATE_AD':
