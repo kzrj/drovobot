@@ -77,8 +77,8 @@ def viber_view(request):
             viber.send_messages(viber_request.sender.id, [
                 TextMessage(text="Укажите на какую сумму:",
                              tracking_data='TRACKING_CREATE_AD_AMOUNT'),
-                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT', 
-                    keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
+                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
+                             keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
             ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
