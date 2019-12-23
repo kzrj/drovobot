@@ -86,8 +86,8 @@ SAMPLE_RICH_MEDIA = {
 
 # CREATE AD
 # CREATE AD LOCATION
-CREATE_AD_LOCATION_BUTTONS = {
-  "Buttons": [{
+CREATE_AD_LOCATION_BUTTONS = [
+   {
         "Columns": 2,
         "Rows": 2,
         "Text": "<br><font color=#494E67><b>Левый берег</b></font>",
@@ -142,8 +142,8 @@ CREATE_AD_LOCATION_BUTTONS = {
         "ActionBody": "Вахмистрово",
         "BgColor": "#f6f7f9",
         "Image": "https://s18.postimg.org/wq06j3jkl/indi.png"
-    }, ]
-}
+    },
+]
 
 CREATE_AD_LOCATION_KEYBOARD = {
     "Type": "keyboard",
@@ -152,8 +152,8 @@ CREATE_AD_LOCATION_KEYBOARD = {
     }
 
 # CREATE AD AMOUNT
-CREATE_AD_AMOUNT_BUTTONS = {
-  "Buttons": [{
+CREATE_AD_AMOUNT_BUTTONS = [
+    {
         "Columns": 2,
         "Rows": 2,
         "Text": "<br><font color=#494E67><b>от 2 до 4 т.р.</b></font>",
@@ -197,8 +197,8 @@ CREATE_AD_AMOUNT_BUTTONS = {
         "ActionBody": "8+",
         "BgColor": "#dd8157",
         "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
-    }]
-}
+    }
+]
 
 CREATE_AD_AMOUNT_KEYBOARD = {
     "Type": "keyboard",
