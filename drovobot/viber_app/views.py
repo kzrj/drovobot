@@ -101,7 +101,8 @@ def viber_view(request):
 
             customer.phone = viber_request.message.text
             customer.save()
-           
+            customer.get_ad.activate
+
             # send choose amount
             viber.send_messages(viber_request.sender.id, [
                 TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
@@ -139,7 +140,7 @@ def viber_view(request):
 
                     else:
                         # continue creating or change
-                        
+
                         viber.send_messages(viber_request.sender.id, [ 
                             TextMessage(text="Укажите в какой район привезти дрова:",
                                  tracking_data='TRACKING_CREATE_AD_LOCATION'),

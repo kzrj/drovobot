@@ -48,5 +48,9 @@ class Ad(CoreModel):
     def to_text(self):
         return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'
 
+    @property
+    def activate(self):
+        self.active = True
+        self.save()
 
 
