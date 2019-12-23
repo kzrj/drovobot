@@ -90,7 +90,7 @@ CREATE_AD_LOCATION_BUTTONS = {
   "Buttons": [{
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>Левый берег</b></font>",
+        "Text": "<br><font color=#494E67><b>Левый берег</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -101,7 +101,7 @@ CREATE_AD_LOCATION_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>Советский район</b></font>",
+        "Text": "<br><font color=#494E67><b>Советский район</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -112,7 +112,7 @@ CREATE_AD_LOCATION_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>Железнодорожный район</b></font>",
+        "Text": "<br><font color=#494E67><b>Железнодорожный район</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -123,7 +123,7 @@ CREATE_AD_LOCATION_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>Октябрьский район</b></font>",
+        "Text": "<br><font color=#494E67><b>Октябрьский район</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -134,7 +134,7 @@ CREATE_AD_LOCATION_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>Вахмистрово</b></font>",
+        "Text": "<br><font color=#494E67><b>Вахмистрово</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -156,7 +156,7 @@ CREATE_AD_AMOUNT_BUTTONS = {
   "Buttons": [{
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>от 2 до 4 т.р.</b></font>",
+        "Text": "<br><font color=#494E67><b>от 2 до 4 т.р.</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -167,7 +167,7 @@ CREATE_AD_AMOUNT_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>от 4 до 6 т.р.</b></font>",
+        "Text": "<br><font color=#494E67><b>от 4 до 6 т.р.</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -178,7 +178,7 @@ CREATE_AD_AMOUNT_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>от 6 до 8 т.р.</b></font>",
+        "Text": "<br><font color=#494E67><b>от 6 до 8 т.р.</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
@@ -189,7 +189,7 @@ CREATE_AD_AMOUNT_BUTTONS = {
     }, {
         "Columns": 2,
         "Rows": 2,
-        "Text": "<br><font color=\"#494E67\"><b>от 8 т.р. и выше</b></font>",
+        "Text": "<br><font color=#494E67><b>от 8 т.р. и выше</b></font>",
         "TextSize": "regular",
         "TextHAlign": "center",
         "TextVAlign": "middle",
