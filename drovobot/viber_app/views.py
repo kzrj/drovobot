@@ -147,11 +147,6 @@ def viber_view(request):
                              keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
                                   ])
 
-                    # send main menu
-                    viber.send_messages(viber_request.sender.id, [
-                        KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
-                    ])
-
                 else:
                     # create new
                     Ad.objects.create(owner=customer, active=False)
