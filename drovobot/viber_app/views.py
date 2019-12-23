@@ -66,7 +66,7 @@ def viber_view(request):
 
             print('TRACKING_CREATE_AD_LOCATION')
             print(viber_request.message.text)
-            
+
             # customer.phone = viber_request.message.text
             # customer.save()
             # Ad.objects.create(owner=customer, active=True)
@@ -147,8 +147,11 @@ def viber_view(request):
                 else:
                     # create new
                     viber.send_messages(viber_request.sender.id, [ 
-                            TextMessage(text="Укажите в какой район привезти дрова:",
-                             tracking_data='TRACKING_CREATE_AD_LOCATION') ])
+                        TextMessage(text="Укажите в какой район привезти дрова:",
+                             tracking_data='TRACKING_CREATE_AD_LOCATION'),
+                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
+                         keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
+                              ])
                     # viber.send_messages(viber_request.sender.id, [ 
                     #         TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
                     #             Проверьте правильность. Изменить телефон нельзя!",
