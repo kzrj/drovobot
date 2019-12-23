@@ -67,13 +67,11 @@ def viber_view(request):
             print('TRACKING_CREATE_AD_LOCATION')
             print(viber_request.message.text)
 
-            # customer.phone = viber_request.message.text
-            # customer.save()
-            # Ad.objects.create(owner=customer, active=True)
-            # send_main_keyboard = True
-            # viber.send_messages(viber_request.sender.id, [ TextMessage(text="Объявление создано.") ])
-            
-            # send choose location
+            ad = customer.get_ad
+            ad.location = viber_request.message.text
+            ad.save()
+
+            # send choose amount
             viber.send_messages(viber_request.sender.id, [
                 TextMessage(text="Укажите на какую сумму:",
                              tracking_data='TRACKING_CREATE_AD_AMOUNT'),
@@ -83,9 +81,12 @@ def viber_view(request):
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
             # save location
-            ad = Ad.objects.filter(owner=customer).first()
             print('TRACKING_CREATE_AD_LOCATION')
             print(viber_request.message.text)
+
+            ad = customer.get_ad
+            ad.amount = viber_request.message.text
+            ad.save()
            
             # send choose amount
             viber.send_messages(viber_request.sender.id, [ 
@@ -95,14 +96,16 @@ def viber_view(request):
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             # save location
-            ad = Ad.objects.filter(owner=customer).first()
             print('TRACKING_CREATE_AD_PHONE')
             print(viber_request.message.text)
+
+            customer.phone = viber_request.message.text
+            customer.save()
            
             # send choose amount
             viber.send_messages(viber_request.sender.id, [
-                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
-                 min_api_version=6),        
+                TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
+                TextMessage(text=ad.to_text, tracking_data='TRACKING_MAIN_MENU'),        
             ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
@@ -148,19 +151,18 @@ def viber_view(request):
 
                 else:
                     # create new
+                    Ad.objects.create(owner=customer, active=False)
+
                     viber.send_messages(viber_request.sender.id, [ 
                         TextMessage(text="Укажите в какой район привезти дрова:",
                              tracking_data='TRACKING_CREATE_AD_LOCATION'),
                         KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
                          keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
                               ])
-                    # viber.send_messages(viber_request.sender.id, [ 
-                    #         TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
-                    #             Проверьте правильность. Изменить телефон нельзя!",
-                    #          tracking_data='TRACKING_CREATE_AD') ])
 
             # deactivate ad
             if viber_request.message.text == 'DEACTIVATE_AD':
+                # CHANGE OR DEACTIVATE
                 ad = Ad.objects.filter(owner=customer, active=True).first()
                 if ad:
                     ad.active = False
@@ -169,12 +171,14 @@ def viber_view(request):
                 else:
                     ad_message = TextMessage(text="У вас нет объявлений.")
                 viber.send_messages(viber_request.sender.id, [ ad_message,
-                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6) ])
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
+                        min_api_version=6) ])
 
         else:
             # send main menu
             viber.send_messages(viber_request.sender.id, [
-                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, min_api_version=6),        
+                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
+                    min_api_version=6),        
             ])
 
     elif isinstance(viber_request, ViberConversationStartedRequest):

@@ -22,18 +22,31 @@ class Customer(CoreModel):
     def __str__(self):
         return self.viber_name
 
+    @property
+    def get_ad(self):
+        return self.ads.all().first()
+
 
 class Ad(CoreModel):
+    LOCATIONS = [('Левый берег', 'Левый берег'), ('Советский район', 'Советский район'),
+        ('Железнодорожный район', 'Железнодорожный район'), ('Октябрьский район', 'Октябрьский район'),
+        ('Вахмистрово', 'Вахмистрово')]
+
+    AMOUNTS = [('2-4', 'от 2 до 4 т.р.'), ('4-6', 'от 4 до 6 т.р.'),
+        ('6-8', 'от 6 до 8 т.р.'), ('8+', 'от 8 т.р. и выше'),
+        ('8/7', '8/7')]
+
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
     active = models.BooleanField(default=True)
-    text = models.CharField(max_length=200, null=True)
+    location = models.CharField(max_length=200, null=True, choices=LOCATIONS)
+    amount = models.CharField(max_length=200, null=True, choices=AMOUNTS)
 
     def __str__(self):
-        return 'Куплю дрова {} {} {}'.format(self.owner.phone, self.owner.viber_name, self.active)
+        return f'Куплю дрова за {self.amount}, привезти в {self.location} т. {self.owner.phone}'
 
     @property
     def to_text(self):
-        return 'Куплю дрова {} {}'.format(self.owner.phone, self.owner.viber_name)
+        return f'Куплю дрова за {self.amount}, привезти в {self.location} т. {self.owner.phone}'
 
 
 
