@@ -117,18 +117,23 @@ def viber_view(request):
             print(viber_request.message.text)
 
             # TODO: Check phone
+            if customer.validate_phone(viber_request.message.text):
+                customer.phone = viber_request.message.text
+                customer.save()
+                customer.get_ad.activate
 
-            customer.phone = viber_request.message.text
-            customer.save()
-            customer.get_ad.activate
-
-            # send choose amount
-            viber.send_messages(viber_request.sender.id, [
-                TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
-                TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
-                KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
-                     min_api_version=6),        
-            ])
+                # send choose amount
+                viber.send_messages(viber_request.sender.id, [
+                    TextMessage(text="Объявление создано:", tracking_data='TRACKING_MAIN_MENU'),
+                    TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                         min_api_version=6),        
+                ])
+            else:
+                viber.send_messages(viber_request.sender.id, [ 
+                                TextMessage(text="Неверный номер. Введите номер телефона \
+                                    в формате 8хххххххххх. 11 цифр. Проверьте правильность. Изменить телефон нельзя!",
+                                 tracking_data='TRACKING_CREATE_AD_PHONE') ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
             # show ads
@@ -158,13 +163,8 @@ def viber_view(request):
                             KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
                              keyboard=CHANGE_AD_KEYBOARD,  min_api_version=6), 
                         ])
-                            
-                        # CHANGE AD
-
-
                     else:
                         # continue creating or change
-
                         viber.send_messages(viber_request.sender.id, [ 
                             TextMessage(text="Укажите в какой район привезти дрова:",
                                  tracking_data='TRACKING_CREATE_AD_LOCATION'),

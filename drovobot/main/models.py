@@ -26,6 +26,24 @@ class Customer(CoreModel):
     def get_ad(self):
         return self.ads.all().first()
 
+    def validate_phone(self, phone):
+        # length
+        if len(phone) == 11:
+            return True
+
+        # is it int
+        try:
+            int(phone)
+            return True
+        except:
+            return False
+
+        # starts by 89
+        if phone[:2] == '89'
+            return True
+
+        return False
+
 
 class Ad(CoreModel):
     LOCATIONS = [('Левый берег', 'Левый берег'), ('Советский район', 'Советский район'),
