@@ -28,7 +28,7 @@ from main.models import Customer, Ad
 from viber_app.viber_services import (
     viber_send_main_menu, viber_send_confirm_phone, viber_send_start,
     MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION_KEYBOARD, CREATE_AD_AMOUNT_KEYBOARD,
-    CHANGE_AD_KEYBOARD,
+    CHANGE_AD_KEYBOARD, ESCAPE_AD_KEYBOARD,
     SAMPLE_RICH_MEDIA, SAMPLE_RICH_MEDIA2
     )
 
@@ -109,15 +109,25 @@ def viber_view(request):
                 viber.send_messages(viber_request.sender.id, [ 
                                 TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
                                     Проверьте правильность. Изменить телефон нельзя!",
-                                 tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                                 tracking_data='TRACKING_CREATE_AD_PHONE'),
+                                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
+                                    keyboard=ESCAPE_AD_KEYBOARD,
+                                    min_api_version=6)
+                                  ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             # save location
             print('TRACKING_CREATE_AD_PHONE')
             print(viber_request.message.text)
 
+            if viber_request.message.text == 'MAIN_MENU':
+                viber.send_messages(viber_request.sender.id, [
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6),
+                ])
+
             # TODO: Check phone
-            if customer.validate_phone(viber_request.message.text):
+            elif customer.validate_phone(viber_request.message.text):
                 customer.phone = viber_request.message.text
                 customer.save()
                 customer.get_ad.activate
@@ -133,7 +143,10 @@ def viber_view(request):
                 viber.send_messages(viber_request.sender.id, [ 
                                 TextMessage(text="Неверный номер. Введите номер телефона " +
                                     "в формате 8хххххххххх. 11 цифр. Проверьте правильность. Изменить телефон нельзя!",
-                                 tracking_data='TRACKING_CREATE_AD_PHONE') ])
+                                 tracking_data='TRACKING_CREATE_AD_PHONE'),
+                                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
+                                    keyboard=ESCAPE_AD_KEYBOARD,
+                                    min_api_version=6) ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
             # show ads

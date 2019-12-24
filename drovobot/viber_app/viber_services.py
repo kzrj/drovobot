@@ -273,6 +273,29 @@ CHANGE_AD_KEYBOARD = {
     "InputFieldState": 'hidden'
     }
 
+
+# ESCAPE
+ESCAPE_BUTTONS = [
+   {
+        "Columns": 3,
+        "Rows": 2,
+        "Text": "<br><font color=#494E67><b>Отменить и вернуться в меню</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "MAIN_MENU",
+        "BgColor": "#f7bb3f",
+        "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+    }
+]
+
+ESCAPE_AD_KEYBOARD = {
+    "Type": "keyboard",
+    "Buttons": ESCAPE_BUTTONS,
+    "InputFieldState": 'minimized'
+    }
+
 # message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
 
 
