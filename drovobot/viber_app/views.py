@@ -136,18 +136,15 @@ def viber_view(request):
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
-                    TextMessage(text='''Объявление создано. Вы можете удалить объявление если
-                            найдете дрова(или оно удалиться через 3 часа). Нужно нажать кнопку 
-                            "Удалить объявление". Ваше объявление:''', tracking_data='TRACKING_MAIN_MENU'),
+                    TextMessage(text='''Объявление создано. Вы можете удалить объявление если найдете дрова(или оно удалиться через 3 часа). Нужно нажать кнопку "Удалить объявление". Ваше объявление:''',
+                     tracking_data='TRACKING_MAIN_MENU'),
                     TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
                          min_api_version=6),        
                 ])
             else:
                 viber.send_messages(viber_request.sender.id, [ 
-                                TextMessage(text='''Неверный номер. Введите номер телефона 
-                                    в формате 8хххххххххх. 11 цифр. Проверьте правильность.
-                                    Изменить телефон нельзя!'''.strip(),
+                                TextMessage(text='''Неверный номер. Введите номер телефона в формате 8хххххххххх. 11 цифр. Проверьте правильность. Изменить телефон нельзя!''',
                                  tracking_data='TRACKING_CREATE_AD_PHONE'),
                                 KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
                                     keyboard=ESCAPE_AD_KEYBOARD,
