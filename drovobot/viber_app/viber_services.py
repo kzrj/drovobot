@@ -293,7 +293,7 @@ ESCAPE_BUTTONS = [
 ESCAPE_AD_KEYBOARD = {
     "Type": "keyboard",
     "Buttons": ESCAPE_BUTTONS,
-    "InputFieldState": 'minimized'
+    "InputFieldState": 'regular'
     }
 
 # message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
