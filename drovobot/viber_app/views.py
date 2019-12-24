@@ -131,8 +131,8 @@ def viber_view(request):
                 ])
             else:
                 viber.send_messages(viber_request.sender.id, [ 
-                                TextMessage(text="Неверный номер. Введите номер телефона \
-                                    в формате 8хххххххххх. 11 цифр. Проверьте правильность. Изменить телефон нельзя!",
+                                TextMessage(text="Неверный номер. Введите номер телефона " +
+                                    "в формате 8хххххххххх. 11 цифр. Проверьте правильность. Изменить телефон нельзя!",
                                  tracking_data='TRACKING_CREATE_AD_PHONE') ])
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
