@@ -32,11 +32,8 @@ class Customer(CoreModel):
             return True
 
         # is it int
-        try:
-            int(phone)
+        if phone.is_integer():
             return True
-        except:
-            return False
 
         # starts by 89
         if phone[:2] == '89':
