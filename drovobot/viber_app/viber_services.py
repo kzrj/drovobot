@@ -269,7 +269,7 @@ CHANGE_AD_BUTTONS = [
 
 CHANGE_AD_KEYBOARD = {
     "Type": "keyboard",
-    "Buttons": CREATE_AD_LOCATION_BUTTONS,
+    "Buttons": CHANGE_AD_BUTTONS,
     "InputFieldState": 'hidden'
     }
 
