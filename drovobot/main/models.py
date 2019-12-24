@@ -29,7 +29,7 @@ class Customer(CoreModel):
     def validate_phone(self, phone):
         # length
         if len(phone) == 11 and \
-          phone.is_integer() and \
+          phone.isdigit() and \
           phone[:2] == '89':
             return True
 
