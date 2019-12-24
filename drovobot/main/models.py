@@ -39,7 +39,7 @@ class Customer(CoreModel):
             return False
 
         # starts by 89
-        if phone[:2] == '89'
+        if phone[:2] == '89':
             return True
 
         return False
