@@ -40,8 +40,6 @@ viber = Api(BotConfiguration(
 ))
 
 
-# def 
-
 @csrf_exempt
 def viber_view(request):
     
@@ -74,7 +72,7 @@ def viber_view(request):
                          keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
                               ])
             elif viber_request.message.text == 'MAIN_MENU':
-                viber.send_messages(viber_request.sender.id, [ ad_message,
+                viber.send_messages(viber_request.sender.id, [ 
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
                         min_api_version=6) ])
             else:
