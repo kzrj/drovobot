@@ -28,15 +28,9 @@ class Customer(CoreModel):
 
     def validate_phone(self, phone):
         # length
-        if len(phone) == 11:
-            return True
-
-        # is it int
-        if phone.is_integer():
-            return True
-
-        # starts by 89
-        if phone[:2] == '89':
+        if len(phone) == 11 and 
+          phone.is_integer() and
+          phone[:2] == '89':
             return True
 
         return False
