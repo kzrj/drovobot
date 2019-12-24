@@ -65,17 +65,30 @@ def viber_view(request):
             print('TRACKING_CREATE_AD_LOCATION')
             print(viber_request.message.text)
 
-            ad = customer.get_ad
-            ad.location = viber_request.message.text
-            ad.save()
+            if viber_request.message.text == 'CHANGE_AD':
+                viber.send_messages(viber_request.sender.id, [ 
+                        TextMessage(text="Укажите в какой район привезти дрова:",
+                             tracking_data='TRACKING_CREATE_AD_LOCATION'),
+                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
+                         keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
+                              ])
+            elif viber_request.message.text == 'MAIN_MENU':
+                viber.send_messages(viber_request.sender.id, [ ad_message,
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
+                        min_api_version=6) ])
+            else:
 
-            # send choose amount
-            viber.send_messages(viber_request.sender.id, [
-                TextMessage(text="Укажите на какую сумму:",
-                             tracking_data='TRACKING_CREATE_AD_AMOUNT'),
-                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
-                             keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
-            ])
+                ad = customer.get_ad
+                ad.location = viber_request.message.text
+                ad.save()
+
+                # send choose amount
+                viber.send_messages(viber_request.sender.id, [
+                    TextMessage(text="Укажите на какую сумму:",
+                                 tracking_data='TRACKING_CREATE_AD_AMOUNT'),
+                    KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
+                                 keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
+                ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
             # save location
@@ -134,9 +147,14 @@ def viber_view(request):
                 ad = customer.get_ad
                 if ad:
                     if ad.active:
-                        ad_message = TextMessage(text="У вас уже есть объявление.")
-                        viber.send_messages(viber_request.sender.id, [ ad_message ])
+                        viber.send_messages(viber_request.sender.id, [ 
+                            TextMessage(text="У вас уже есть объявление. Можно изменить район и сумму."),
+                            KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
+                             keyboard=CHANGE_AD_KEYBOARD,  min_api_version=6), 
+                        ])
+                            
                         # CHANGE AD
+
 
                     else:
                         # continue creating or change

@@ -8,7 +8,7 @@ from viberbot.api.messages import (
         RichMediaMessage
     )
 
-
+# MAIN_MENU
 MAIN_MENU_BUTTONS = [
         {
             "Columns": 2,
@@ -56,7 +56,7 @@ MAIN_MENU_KEYBOARD = {
     }
 
 
-
+# SAMPLE RICH_MEDIA
 SAMPLE_RICH_MEDIA = {
   "Buttons": [
     {
@@ -239,6 +239,39 @@ SAMPLE_RICH_MEDIA2 = {
 }
 
 SAMPLE_ALT_TEXT = "upgrade now!"
+
+# CHANGE_AD
+CHANGE_AD_BUTTONS = [
+   {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=#494E67><b>Изменить</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "CHANGE_AD",
+        "BgColor": "#f7bb3f",
+        "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=#494E67><b>Меню</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "MAIN_MENU",
+        "BgColor": "#7eceea",
+        "Image": "https://s18.postimg.org/ntpef5syd/french.png"
+    }, 
+]
+
+CHANGE_AD_KEYBOARD = {
+    "Type": "keyboard",
+    "Buttons": CREATE_AD_LOCATION_BUTTONS,
+    "InputFieldState": 'hidden'
+    }
 
 # message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
 
