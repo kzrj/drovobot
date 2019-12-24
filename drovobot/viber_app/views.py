@@ -147,7 +147,7 @@ def viber_view(request):
                 viber.send_messages(viber_request.sender.id, [ 
                                 TextMessage(text='''Неверный номер. Введите номер телефона 
                                     в формате 8хххххххххх. 11 цифр. Проверьте правильность.
-                                    Изменить телефон нельзя!''',
+                                    Изменить телефон нельзя!'''.strip(),
                                  tracking_data='TRACKING_CREATE_AD_PHONE'),
                                 KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
                                     keyboard=ESCAPE_AD_KEYBOARD,
