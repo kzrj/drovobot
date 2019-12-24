@@ -243,7 +243,7 @@ SAMPLE_ALT_TEXT = "upgrade now!"
 # CHANGE_AD
 CHANGE_AD_BUTTONS = [
    {
-        "Columns": 2,
+        "Columns": 3,
         "Rows": 2,
         "Text": "<br><font color=#494E67><b>Изменить</b></font>",
         "TextSize": "regular",
@@ -254,7 +254,7 @@ CHANGE_AD_BUTTONS = [
         "BgColor": "#f7bb3f",
         "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
     }, {
-        "Columns": 2,
+        "Columns": 3,
         "Rows": 2,
         "Text": "<br><font color=#494E67><b>Меню</b></font>",
         "TextSize": "regular",

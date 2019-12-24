@@ -100,7 +100,7 @@ def viber_view(request):
             # send input phone or main_menu
             if customer.phone:
                 viber.send_messages(viber_request.sender.id, [
-                    TextMessage(text="Объявление изиенено:", tracking_data='TRACKING_MAIN_MENU'),
+                    TextMessage(text="Объявление изменено:", tracking_data='TRACKING_MAIN_MENU'),
                     TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
                          min_api_version=6),        
