@@ -19,6 +19,18 @@ services:
     image: postgres:10.1-alpine
     # volumes:
     #   - ./postgres_data:/var/lib/postgresql/data
+
+  # rabbit:
+  #   restart: unless-stopped 
+  #   hostname: rabbit
+  #   image: rabbitmq:latest
+  #   volumes:
+  #     - ./rabbit_data:/var/lib/rabbitmq/mnesia/rabbit@rabbit
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=qwerty123
+  #   ports:
+  #     - "5673:5672"
         
   backend:
     build: .
@@ -41,14 +53,34 @@ services:
     ports:
       - "8000"
 
-  # viber:
-  #   build: ./viberapi
+  # worker:
+  #   build: .
+  #   restart: unless-stopped
   #   volumes:
   #     - .:/code
-
-  #   command: bash -c "cd viberapi && python viber-flask.py"
+  #   links:
+  #     - db
+  #     - rabbit
+  #   depends_on:
+  #     - rabbit
+  #   command: bash -c "cd drovobot && celery -A drovobot worker --loglevel=info"
+        
+  # # for test only
+  # flower:
+  #   build: .
+  #   volumes:
+  #     - .:/code
   #   ports:
-  #     - "443:443"
-         
+  #    - "5555:5555"
+  #   links:
+  #     - db
+  #     - rabbit
+  #     - worker
+  #   depends_on:
+  #     - worker
+  #     - rabbit
+  #   command: bash -c "cd drovobot && celery -A drovobot.celery flower --port=5555"
+
 # volumes:
   # postgres_data:
+  # rabbit_data:
