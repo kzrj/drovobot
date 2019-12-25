@@ -37,13 +37,19 @@ class Customer(CoreModel):
 
 class Ad(CoreModel):
     LOCATIONS = [
-        'Левый берег',
-        'Советский район',
-        'Железнодорожный район',
-        'Октябрьский район',
-        'Вахмистрово']
+        ('Левый берег', 'Левый берег'),
+        ('Советский район','Советский район'),
+        ('Железнодорожный район', 'Железнодорожный район'),
+        ('Октябрьский район', 'Октябрьский район'),
+        ('Вахмистрово','Вахмистрово'),
+    ]
 
-    AMOUNTS = [ 'от 2 до 4 т.р.', 'от 4 до 6 т.р.', 'от 6 до 8 т.р.', 'от 8 т.р. и выше' ]
+    AMOUNTS = [
+        ('от 2 до 4 т.р.', 'от 2 до 4 т.р.'),
+        ('от 4 до 6 т.р.', 'от 4 до 6 т.р.'),
+        ('от 6 до 8 т.р.', 'от 6 до 8 т.р.'),
+        ('от 8 т.р. и выше', 'от 8 т.р. и выше') 
+    ]
 
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
     active = models.BooleanField(default=True)
@@ -63,12 +69,12 @@ class Ad(CoreModel):
         self.save()
 
     def validate_location(self, location):
-        if location in LOCATIONS:
+        if location in [l[0] for l in LOCATIONS]:
             return True
         return False
 
     def validate_amount(self, amount):
-        if location in AMOUNTS:
+        if amount in [a[0] for a in AMOUNTS]:
             return True
         return False
 
