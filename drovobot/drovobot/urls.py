@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
 
 from viber_app.views import viber_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('viber/', viber_view, name='viber'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
