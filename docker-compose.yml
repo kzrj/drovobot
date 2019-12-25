@@ -20,17 +20,17 @@ services:
     # volumes:
     #   - ./postgres_data:/var/lib/postgresql/data
 
-  rabbit:
-    restart: unless-stopped 
-    hostname: rabbit
-    image: rabbitmq:latest
-    # volumes:
-    #   - ./rabbit_data:/var/lib/rabbitmq/mnesia/rabbit@rabbit
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=qwerty123
-    ports:
-      - "5673:5672"
+  # rabbit:
+  #   restart: unless-stopped 
+  #   hostname: rabbit
+  #   image: rabbitmq:latest
+  #   # volumes:
+  #   #   - ./rabbit_data:/var/lib/rabbitmq/mnesia/rabbit@rabbit
+  #   environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=qwerty123
+  #   ports:
+  #     - "5673:5672"
         
   backend:
     build: .
