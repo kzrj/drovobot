@@ -21,6 +21,7 @@ class Customer(CoreModel):
     viber_avatar = models.URLField(max_length=300, null=True)
     last_seen_at = models.DateTimeField(auto_now_add=True)
     phone = models.CharField(max_length=11)
+    banned = models.BooleanField(default=False)
 
     objects = CustomerManager()
 

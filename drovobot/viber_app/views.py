@@ -57,6 +57,12 @@ def viber_view(request):
             viber_name=viber_request.sender.name,
             viber_avatar=viber_request.sender.avatar,
             )
+        if customer.banned:
+            viber.send_messages(viber_request.sender.id, [ 
+                TextMessage(text="Заблокировано(",
+                     tracking_data='BANNED'),
+                      ])
+            return HttpResponse('Banned!')
 
         # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_LOCATION':
@@ -129,7 +135,7 @@ def viber_view(request):
                                         keyboard=ESCAPE_AD_KEYBOARD,
                                         min_api_version=6)
                                       ])
-                    
+
             elif viber_request.message.text == 'MAIN_MENU':
                 viber.send_messages(viber_request.sender.id, [ 
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
