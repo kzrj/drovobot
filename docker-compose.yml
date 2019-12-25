@@ -53,17 +53,17 @@ services:
     ports:
       - "8000"
 
-  # worker:
-  #   build: .
-  #   restart: unless-stopped
-  #   volumes:
-  #     - .:/code
-  #   links:
-  #     - db
-  #     - rabbit
-  #   depends_on:
-  #     - rabbit
-  #   command: bash -c "cd drovobot && celery -A drovobot worker --loglevel=info"
+  worker:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - .:/code
+    links:
+      - db
+      - rabbit
+    depends_on:
+      - rabbit
+    command: bash -c "cd drovobot && celery -A drovobot worker --loglevel=info"
         
   # # for test only
   # flower:
