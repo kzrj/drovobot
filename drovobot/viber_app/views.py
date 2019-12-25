@@ -76,17 +76,27 @@ def viber_view(request):
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
                         min_api_version=6) ])
             else:
+                # check location
                 ad = customer.get_ad
-                ad.location = viber_request.message.text
-                ad.save()
+                if ad.validate_location(viber_request.message.text):
+                    ad.location = viber_request.message.text
+                    ad.save()
 
-                # send choose amount
-                viber.send_messages(viber_request.sender.id, [
-                    TextMessage(text="Укажите на какую сумму:",
-                                 tracking_data='TRACKING_CREATE_AD_AMOUNT'),
-                    KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
-                                 keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
-                ])
+                    # send choose amount
+                    viber.send_messages(viber_request.sender.id, [
+                        TextMessage(text="Укажите на какую сумму:",
+                                     tracking_data='TRACKING_CREATE_AD_AMOUNT'),
+                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_AMOUNT',
+                                     keyboard=CREATE_AD_AMOUNT_KEYBOARD, min_api_version=6),        
+                    ])
+                else:
+                    # repeat location choose
+                    viber.send_messages(viber_request.sender.id, [ 
+                        TextMessage(text="Укажите в какой район привезти дрова:",
+                             tracking_data='TRACKING_CREATE_AD_LOCATION'),
+                        KeyboardMessage(tracking_data='TRACKING_CREATE_AD_LOCATION',
+                         keyboard=CREATE_AD_LOCATION_KEYBOARD,  min_api_version=6), 
+                              ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
             # save location
@@ -94,28 +104,31 @@ def viber_view(request):
             print(viber_request.message.text)
 
             ad = customer.get_ad
-            ad.amount = viber_request.message.text
-            ad.save()
-           
-            # send input phone or main_menu
-            if customer.phone:
-                customer.get_ad.activate
-                viber.send_messages(viber_request.sender.id, [
-                    TextMessage(text="Объявление изменено и опубликовано:",
-                         tracking_data='TRACKING_MAIN_MENU'),
-                    TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
-                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
-                         min_api_version=6),        
-                ])
-            else:
-                viber.send_messages(viber_request.sender.id, [ 
-                                TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
-                                    Проверьте правильность. Изменить телефон нельзя!",
-                                 tracking_data='TRACKING_CREATE_AD_PHONE'),
-                                KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
-                                    keyboard=ESCAPE_AD_KEYBOARD,
-                                    min_api_version=6)
-                                  ])
+
+            # check amount
+            if ad.validate_amount(viber_request.message.text):
+                ad.amount = viber_request.message.text
+                ad.save()
+               
+                # send input phone or main_menu
+                if customer.phone:
+                    customer.get_ad.activate
+                    viber.send_messages(viber_request.sender.id, [
+                        TextMessage(text="Объявление изменено и опубликовано:",
+                             tracking_data='TRACKING_MAIN_MENU'),
+                        TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
+                        KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                             min_api_version=6),        
+                    ])
+                else:
+                    viber.send_messages(viber_request.sender.id, [ 
+                                    TextMessage(text="Введите номер телефона в формате 8хххххххххх. \
+                                        Проверьте правильность. Изменить телефон нельзя!",
+                                     tracking_data='TRACKING_CREATE_AD_PHONE'),
+                                    KeyboardMessage(tracking_data='TRACKING_CREATE_AD_PHONE', 
+                                        keyboard=ESCAPE_AD_KEYBOARD,
+                                        min_api_version=6)
+                                      ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             # save location
@@ -128,7 +141,7 @@ def viber_view(request):
                      min_api_version=6),
                 ])
 
-            # TODO: Check phone
+            # Check phone
             elif customer.validate_phone(viber_request.message.text):
                 customer.phone = viber_request.message.text
                 customer.save()

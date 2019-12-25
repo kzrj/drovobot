@@ -37,15 +37,13 @@ class Customer(CoreModel):
 
 class Ad(CoreModel):
     LOCATIONS = [
-    	'Левый берег',
-    	'Советский район',
+        'Левый берег',
+        'Советский район',
         'Железнодорожный район',
         'Октябрьский район',
         'Вахмистрово']
 
-    AMOUNTS = [('от 2 до 4 т.р.', 'от 2 до 4 т.р.'), ('от 4 до 6 т.р.', 'от 4 до 6 т.р.'),
-        ('от 6 до 8 т.р.', 'от 6 до 8 т.р.'), ('от 8 т.р. и выше', 'от 8 т.р. и выше'),
-        ('8/7', '8/7')]
+    AMOUNTS = [ 'от 2 до 4 т.р.', 'от 4 до 6 т.р.', 'от 6 до 8 т.р.', 'от 8 т.р. и выше' ]
 
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='ads')
     active = models.BooleanField(default=True)
@@ -63,5 +61,15 @@ class Ad(CoreModel):
     def activate(self):
         self.active = True
         self.save()
+
+    def validate_location(self, location):
+        if location in LOCATIONS:
+            return True
+        return False
+
+    def validate_amount(self, amount):
+        if location in AMOUNTS:
+            return True
+        return False
 
 
