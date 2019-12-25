@@ -36,7 +36,7 @@ class Customer(CoreModel):
         if len(phone) == 11 and \
           phone.isdigit() and \
           phone[:2] == '89' and \
-          not cls.objects.filter(phone=phone).first():
+          not Customer.objects.filter(phone=phone).first():
             return True
 
         return False
