@@ -11,12 +11,18 @@ class CoreModel(models.Model):
         abstract = True
 
 
+class CustomerManager(models.Manager):
+    pass
+
+
 class Customer(CoreModel):
     viber_id = models.CharField(max_length=100)
     viber_name = models.CharField(max_length=100)
     viber_avatar = models.URLField(max_length=300, null=True)
     last_seen_at = models.DateTimeField(auto_now_add=True)
     phone = models.CharField(max_length=11)
+
+    objects = CustomerManager()
 
     def __str__(self):
         return self.viber_name
@@ -29,7 +35,8 @@ class Customer(CoreModel):
         # length
         if len(phone) == 11 and \
           phone.isdigit() and \
-          phone[:2] == '89':
+          phone[:2] == '89' and \
+          not self.objects.filter(phone=phone).first():
             return True
 
         return False
