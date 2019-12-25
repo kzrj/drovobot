@@ -21,7 +21,6 @@ from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 from django.http import HttpResponse
-from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 
 from main.models import Customer, Ad
@@ -42,14 +41,7 @@ viber = Api(BotConfiguration(
 
 @csrf_exempt
 def viber_view(request):
-    
-    # if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
-    #     return HttpResponse(status=403)
-    print('Request ___________________________________________!')
-    print(request.body)
     viber_request = viber.parse_request(request.body)
-    print(viber_request)
-
     if isinstance(viber_request, ViberMessageRequest):
         # get or create customer.
         customer, created = Customer.objects.get_or_create(
@@ -57,6 +49,7 @@ def viber_view(request):
             viber_name=viber_request.sender.name,
             viber_avatar=viber_request.sender.avatar,
             )
+
         if customer.banned:
             viber.send_messages(viber_request.sender.id, [ 
                 TextMessage(text="Заблокировано(",
@@ -64,12 +57,7 @@ def viber_view(request):
                       ])
             return HttpResponse('Banned!')
 
-        # check TRACKING DATA
         if viber_request.message.tracking_data == 'TRACKING_CREATE_AD_LOCATION':
-
-            print('TRACKING_CREATE_AD_LOCATION')
-            print(viber_request.message.text)
-
             if viber_request.message.text == 'CHANGE_AD':
                 viber.send_messages(viber_request.sender.id, [ 
                         TextMessage(text="Укажите в какой район привезти дрова:",
@@ -82,7 +70,6 @@ def viber_view(request):
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
                         min_api_version=6) ])
             else:
-                # check location
                 ad = customer.get_ad
                 if ad.validate_location(viber_request.message.text):
                     ad.location = viber_request.message.text
@@ -105,10 +92,6 @@ def viber_view(request):
                               ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
-            # save location
-            print('TRACKING_CREATE_AD_AMOUNT')
-            print(viber_request.message.text)
-
             ad = customer.get_ad
 
             # check amount
@@ -142,10 +125,6 @@ def viber_view(request):
                         min_api_version=6) ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
-            # save location
-            print('TRACKING_CREATE_AD_PHONE')
-            print(viber_request.message.text)
-
             if viber_request.message.text == 'MAIN_MENU':
                 viber.send_messages(viber_request.sender.id, [
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
