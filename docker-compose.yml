@@ -21,7 +21,7 @@ services:
     #   - ./postgres_data:/var/lib/postgresql/data
 
   rabbit:
-    # restart: unless-stopped 
+    restart: unless-stopped 
     hostname: rabbit
     image: rabbitmq:latest
     # volumes:
@@ -34,7 +34,7 @@ services:
         
   backend:
     build: .
-    # restart: unless-stopped
+    restart: unless-stopped
     volumes:
       - .:/code
     depends_on:
@@ -55,7 +55,7 @@ services:
 
   worker:
     build: .
-    # restart: unless-stopped
+    restart: unless-stopped
     volumes:
       - .:/code
     links:
