@@ -142,6 +142,17 @@ CREATE_AD_LOCATION_BUTTONS = [
         "ActionBody": "Вахмистрово",
         "BgColor": "#f6f7f9",
         "Image": "https://s18.postimg.org/wq06j3jkl/indi.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=#494E67><b>МЕНЮ</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "MAIN_MENU",
+        "BgColor": "#f6f7f9",
+        "Image": "https://s18.postimg.org/wq06j3jkl/indi.png"
     },
 ]
 
@@ -195,6 +206,17 @@ CREATE_AD_AMOUNT_BUTTONS = [
         "TextVAlign": "middle",
         "ActionType": "reply",
         "ActionBody": "от 8 т.р. и выше",
+        "BgColor": "#dd8157",
+        "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
+    }, {
+        "Columns": 2,
+        "Rows": 2,
+        "Text": "<br><font color=#494E67><b>МЕНЮ</b></font>",
+        "TextSize": "regular",
+        "TextHAlign": "center",
+        "TextVAlign": "middle",
+        "ActionType": "reply",
+        "ActionBody": "MAIN_MENU",
         "BgColor": "#dd8157",
         "Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
     }

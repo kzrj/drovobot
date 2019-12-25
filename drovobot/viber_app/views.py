@@ -100,7 +100,7 @@ def viber_view(request):
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_AMOUNT':
             # save location
-            print('TRACKING_CREATE_AD_LOCATION')
+            print('TRACKING_CREATE_AD_AMOUNT')
             print(viber_request.message.text)
 
             ad = customer.get_ad
@@ -129,6 +129,11 @@ def viber_view(request):
                                         keyboard=ESCAPE_AD_KEYBOARD,
                                         min_api_version=6)
                                       ])
+                    
+            elif viber_request.message.text == 'MAIN_MENU':
+                viber.send_messages(viber_request.sender.id, [ 
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
+                        min_api_version=6) ])
 
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             # save location
