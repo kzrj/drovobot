@@ -69,12 +69,12 @@ class Ad(CoreModel):
         self.save()
 
     def validate_location(self, location):
-        if location in [l[0] for l in LOCATIONS]:
+        if location in [l[0] for l in self.LOCATIONS]:
             return True
         return False
 
     def validate_amount(self, amount):
-        if amount in [a[0] for a in AMOUNTS]:
+        if amount in [a[0] for a in self.AMOUNTS]:
             return True
         return False
 
