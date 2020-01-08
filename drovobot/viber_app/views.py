@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import json 
+import json
+import datetime
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
