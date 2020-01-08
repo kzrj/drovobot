@@ -159,7 +159,7 @@ def viber_view(request):
                 ads = Ad.objects.filter(active=True)
                 celery_tasks.deactivate_ad.apply_async(
                     args=[],
-                    eta=datetime.timedelta(seconds=10)
+                    eta=datetime.datetime.now() + datetime.timedelta(seconds=10)
                 )
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
