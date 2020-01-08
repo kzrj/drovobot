@@ -23,6 +23,7 @@ from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 
 import main.tasks as celery_tasks
 from main.models import Customer, Ad
@@ -160,7 +161,7 @@ def viber_view(request):
 
                 celery_tasks.deactivate_ad.apply_async(
                     args=[],
-                    eta=datetime.datetime.now() + datetime.timedelta(seconds=2)
+                    eta=timezone.now() + datetime.timedelta(seconds=2)
                 )
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
