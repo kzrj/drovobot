@@ -23,6 +23,7 @@ from viberbot.api.viber_requests import ViberUnsubscribedRequest
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+import main.tasks as celery_tasks
 from main.models import Customer, Ad
 from viber_app.viber_services import (
     MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION_KEYBOARD, CREATE_AD_AMOUNT_KEYBOARD,
@@ -155,6 +156,10 @@ def viber_view(request):
             # show ads
             if viber_request.message.text == 'SHOW_ADS':
                 ads = Ad.objects.filter(active=True)
+                celery_tasks.deactivate_ad.apply_async(
+                    args=[],
+                    eta=datetime.timedelta(seconds=10)
+                )
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
                 if ads.count() == 0:

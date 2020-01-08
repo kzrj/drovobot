@@ -76,6 +76,11 @@ class Ad(CoreModel):
         self.active = True
         self.save()
 
+    @property
+    def deactivate(self):
+        self.active = False
+        self.save()
+
     def validate_location(self, location):
         if location in [l[0] for l in self.LOCATIONS]:
             return True
