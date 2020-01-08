@@ -7,5 +7,4 @@ def deactivate_ad():
     print("OOOOOOOOOPAPAPPAPAAAAAAAAAAAAAAAAAAAAAAAAPAPAP@!!!!!!!!!!!!!!")
     # ad.deactivate
     print("DEACTIVATE")
-    return None
-
+    return 'HUIIIIIIILAAAAAAAAAAAAAAAA'
