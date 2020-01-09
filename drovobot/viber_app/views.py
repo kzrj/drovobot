@@ -166,7 +166,7 @@ def viber_view(request):
                 )
                 print('TIMEZONE NOW', timezone.now())
                 print('DATETIME NOW', datetime.datetime.now())
-                print('DATETIME UTC NOW', datetime.utcnow())
+                print('DATETIME UTC NOW', datetime.datetime.utcnow())
                 print('-------------------------------------------------')
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
