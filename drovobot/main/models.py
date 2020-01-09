@@ -2,6 +2,8 @@
 from django.db import models
 from django.conf import settings
 
+import main.tasks as celery_tasks
+
 
 class CoreModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -74,11 +76,18 @@ class Ad(CoreModel):
     @property
     def activate(self):
         self.active = True
+        celery_tasks.deactivate_ad.apply_async(
+                    args=[self],
+                    # eta=timezone.now() + datetime.timedelta(seconds=15),
+                    countdown=30
+                    # countdown=86400 # 24h
+                )
         self.save()
 
     @property
     def deactivate(self):
         self.active = False
+        print("DEACTIVATE MODEL")
         self.save()
 
     def validate_location(self, location):
