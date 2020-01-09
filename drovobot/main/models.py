@@ -2,8 +2,6 @@
 from django.db import models
 from django.conf import settings
 
-import main.tasks as celery_tasks
-
 
 class CoreModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
