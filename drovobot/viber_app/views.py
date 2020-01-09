@@ -161,9 +161,12 @@ def viber_view(request):
 
                 celery_tasks.deactivate_ad.apply_async(
                     args=[],
-                    eta=timezone.now() + datetime.timedelta(seconds=15)
+                    # eta=timezone.now() + datetime.timedelta(seconds=15),
+                    countdown=15
                 )
                 print('TIMEZONE NOW', timezone.now())
+                print('DATETIME NOW', datetime.datetime.now())
+                print('DATETIME UTC NOW', datetime.utcnow())
                 print('-------------------------------------------------')
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
