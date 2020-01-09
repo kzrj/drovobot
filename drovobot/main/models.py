@@ -76,13 +76,6 @@ class Ad(CoreModel):
     @property
     def activate(self):
         self.active = True
-        celery_tasks.deactivate_ad.apply_async(
-                    ((self), ),
-                    # args=[self, ],
-                    # eta=timezone.now() + datetime.timedelta(seconds=15),
-                    countdown=30
-                    # countdown=86400 # 24h
-                )
         self.save()
 
     @property

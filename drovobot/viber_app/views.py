@@ -137,6 +137,12 @@ def viber_view(request):
                 customer.phone = viber_request.message.text
                 customer.save()
                 customer.get_ad.activate
+                celery_tasks.deactivate_ad.apply_async(
+                    args=[],
+                    # eta=timezone.now() + datetime.timedelta(seconds=15),
+                    countdown=30
+                    # countdown=86400 # 24h
+                )
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
