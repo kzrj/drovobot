@@ -103,6 +103,12 @@ def viber_view(request):
                 # send input phone or main_menu
                 if customer.phone:
                     customer.get_ad.activate
+                    celery_tasks.deactivate_ad.apply_async(
+                        args=[customer.get_ad.pk],
+                        countdown=30
+                        # countdown=86400 # 24h
+                    )
+
                     viber.send_messages(viber_request.sender.id, [
                         TextMessage(text="Объявление изменено и опубликовано:",
                              tracking_data='TRACKING_MAIN_MENU'),
@@ -139,7 +145,6 @@ def viber_view(request):
                 customer.get_ad.activate
                 celery_tasks.deactivate_ad.apply_async(
                     args=[customer.get_ad.pk],
-                    # eta=timezone.now() + datetime.timedelta(seconds=15),
                     countdown=30
                     # countdown=86400 # 24h
                 )
@@ -164,17 +169,6 @@ def viber_view(request):
             # show ads
             if viber_request.message.text == 'SHOW_ADS':
                 ads = Ad.objects.filter(active=True)
-
-                # celery_tasks.deactivate_ad.apply_async(
-                #     args=[],
-                #     # eta=timezone.now() + datetime.timedelta(seconds=15),
-                #     countdown=30
-                #     # countdown=86400 # 24h
-                # )
-                print('TIMEZONE NOW', timezone.now())
-                print('DATETIME NOW', datetime.datetime.now())
-                print('DATETIME UTC NOW', datetime.datetime.utcnow())
-                print('-------------------------------------------------')
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
                 if ads.count() == 0:
