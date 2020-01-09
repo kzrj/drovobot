@@ -138,7 +138,7 @@ def viber_view(request):
                 customer.save()
                 customer.get_ad.activate
                 celery_tasks.deactivate_ad.apply_async(
-                    args=[],
+                    args=[customer.get_ad.pk],
                     # eta=timezone.now() + datetime.timedelta(seconds=15),
                     countdown=30
                     # countdown=86400 # 24h
