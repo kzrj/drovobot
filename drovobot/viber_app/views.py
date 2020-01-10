@@ -29,7 +29,7 @@ import main.tasks as celery_tasks
 from main.models import Customer, Ad
 from viber_app.viber_services import (
     MAIN_MENU_BUTTONS, MAIN_MENU_KEYBOARD, CREATE_AD_LOCATION_KEYBOARD, CREATE_AD_AMOUNT_KEYBOARD,
-    CHANGE_AD_KEYBOARD, ESCAPE_AD_KEYBOARD, SAMPLE_RICH_MEDIA,
+    CHANGE_AD_KEYBOARD, ESCAPE_AD_KEYBOARD, SAMPLE_RICH_MEDIA, HELP_TEXT
     )
 
 
@@ -134,6 +134,7 @@ def viber_view(request):
         elif viber_request.message.tracking_data == 'TRACKING_CREATE_AD_PHONE':
             if viber_request.message.text == 'MAIN_MENU':
                 viber.send_messages(viber_request.sender.id, [
+                    TextMessage(text=HELP_TEXT),
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
                      min_api_version=6),
                 ])
@@ -230,6 +231,7 @@ def viber_view(request):
         else:
             # send main menu
             viber.send_messages(viber_request.sender.id, [
+                TextMessage(text=HELP_TEXT),
                 KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
                     min_api_version=6),        
             ])

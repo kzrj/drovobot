@@ -8,6 +8,12 @@ from viberbot.api.messages import (
         RichMediaMessage
     )
 
+# HELP TEXT
+
+HELP_TEXT = 'Чтобы купить дрова - нажмите "Купить дрова!" и создайте объявление.\
+            Его видно 24 часа. Или вы можете удалить его нажав "Удалить объявление".\
+            Чтобы продать дрова - нажмите "Посмотреть объявления".'
+
 # MAIN_MENU
 MAIN_MENU_BUTTONS = [
         {
@@ -65,9 +71,7 @@ SAMPLE_RICH_MEDIA = {
         "Text":'<font color=#323232><b>Дровобот!</b></font> \
             <font color=#777777><br>Вас приветствует ДровоБот! :) \
             Этот бот поможет вам купить и продать дрова! \
-            Чтобы купить дрова - нажмите</font> <font color=#6fc133>"Купить дрова!"</font><font color=#777777> и создайте объявление. Его видно 24 часа. \
-            Или вы можете удалить его нажав</font> <font color=#6fc133>"Удалить объявление"</font><font color=#777777>. \
-            Чтобы продать дрова - нажмите</font> <font color=#6fc133>"Посмотреть объявления"</font><font color=#777777>.</font>',
+            Нажмите</font> <font color=#6fc133>"СТАРТ!"</font>',
         "ActionType":"none",
         "ActionBody":"https://www.google.com",
         "TextSize":"medium",
