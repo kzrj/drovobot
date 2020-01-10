@@ -128,6 +128,7 @@ def viber_view(request):
 
             elif viber_request.message.text == 'MAIN_MENU':
                 viber.send_messages(viber_request.sender.id, [ 
+                    TextMessage(text=HELP_TEXT),
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD, 
                         min_api_version=6) ])
 
