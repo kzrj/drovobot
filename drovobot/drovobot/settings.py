@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '23zi^dn*!1-6%2b@tb&5xb!)6x=zx1-6*0w#77e5!xth7k=5hg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = ['neo-boudoir.ru', 'api']
 

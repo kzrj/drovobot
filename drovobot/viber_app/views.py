@@ -105,12 +105,12 @@ def viber_view(request):
                     customer.get_ad.activate
                     celery_tasks.deactivate_ad.apply_async(
                         args=[customer.get_ad.pk],
-                        countdown=30
-                        # countdown=86400 # 24h
+                        # countdown=30
+                        countdown=86400 # 24h
                     )
 
                     viber.send_messages(viber_request.sender.id, [
-                        TextMessage(text="Объявление изменено и опубликовано:",
+                        TextMessage(text="Объявление изменено и опубликовано. Оно удалится через 24 часа.",
                              tracking_data='TRACKING_MAIN_MENU'),
                         TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
                         KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
@@ -145,13 +145,13 @@ def viber_view(request):
                 customer.get_ad.activate
                 celery_tasks.deactivate_ad.apply_async(
                     args=[customer.get_ad.pk],
-                    countdown=30
-                    # countdown=86400 # 24h
+                    # countdown=30
+                    countdown=86400 # 24h
                 )
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
-                    TextMessage(text='''Объявление создано. Вы можете удалить объявление если найдете дрова(или оно удалиться через 3 часа). Нужно нажать кнопку "Удалить объявление". Ваше объявление:''',
+                    TextMessage(text='''Объявление создано. Нужно нажать кнопку "Удалить объявление" для удаления объявления или оно автоматически удалится через 24 часа . Ваше объявление:''',
                      tracking_data='TRACKING_MAIN_MENU'),
                     TextMessage(text=customer.get_ad.to_text, tracking_data='TRACKING_MAIN_MENU'),
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,

@@ -62,8 +62,12 @@ SAMPLE_RICH_MEDIA = {
     {
         "Columns":6,
         "Rows":4,
-        "Text":"<font color=#323232><b>Дровобот!</b></font> \
-            <font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>",
+        "Text":'<font color=#323232><b>Дровобот!</b></font> \
+            <font color=#777777><br>Вас приветствует ДровоБот! :) \
+            Этот бот поможет вам купить и продать дрова! \
+            Чтобы купить дрова - нажмите</font> <font color=#6fc133>"Купить дрова!"</font><font color=#777777> и создайте объявление. Его видно 24 часа. \
+            Или вы можете удалить его нажав</font> <font color=#6fc133>"Удалить объявление"</font><font color=#777777>. \
+            Чтобы продать дрова - нажмите</font> <font color=#6fc133>"Посмотреть объявления"</font><font color=#777777>.</font>',
         "ActionType":"none",
         "ActionBody":"https://www.google.com",
         "TextSize":"medium",
