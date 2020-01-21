@@ -39,7 +39,7 @@ viber = Api(BotConfiguration(
     auth_token='495624962167d356-894001973007218c-448b90921c20d990'
 ))
 
-COUNTDOWN = 120
+COUNTDOWN = 86400
 # 86400 = 24h
 
 
