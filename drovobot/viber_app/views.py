@@ -39,6 +39,9 @@ viber = Api(BotConfiguration(
     auth_token='495624962167d356-894001973007218c-448b90921c20d990'
 ))
 
+COUNTDOWN = 120
+# 86400 = 24h
+
 
 @csrf_exempt
 def viber_view(request):
@@ -105,8 +108,7 @@ def viber_view(request):
                     customer.get_ad.activate
                     celery_tasks.deactivate_ad.apply_async(
                         args=[customer.get_ad.pk],
-                        # countdown=30
-                        countdown=86400 # 24h
+                        countdown=COUNTDOWN
                     )
 
                     viber.send_messages(viber_request.sender.id, [
@@ -147,8 +149,7 @@ def viber_view(request):
                 customer.get_ad.activate
                 celery_tasks.deactivate_ad.apply_async(
                     args=[customer.get_ad.pk],
-                    # countdown=30
-                    countdown=86400 # 24h
+                    countdown=COUNTDOWN
                 )
 
                 # send choose amount

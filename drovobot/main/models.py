@@ -79,7 +79,6 @@ class Ad(CoreModel):
     @property
     def deactivate(self):
         self.active = False
-        print("DEACTIVATE MODEL")
         self.save()
 
     def validate_location(self, location):
