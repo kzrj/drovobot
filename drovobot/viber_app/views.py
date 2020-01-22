@@ -111,6 +111,8 @@ def viber_view(request):
                         countdown=COUNTDOWN
                     )
 
+                    # SEND AD TO SELLERS
+
                     viber.send_messages(viber_request.sender.id, [
                         TextMessage(text="Объявление изменено и опубликовано. Оно удалится через 24 часа.",
                              tracking_data='TRACKING_MAIN_MENU'),
@@ -151,6 +153,9 @@ def viber_view(request):
                     args=[customer.get_ad.pk],
                     countdown=COUNTDOWN
                 )
+
+                # SEND AD TO SELLERS
+                
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
