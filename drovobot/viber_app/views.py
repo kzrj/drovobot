@@ -42,6 +42,8 @@ viber = Api(BotConfiguration(
 COUNTDOWN = 86400
 # 86400 = 24h
 
+sellers = Customer.objects.filter(phone=None)
+
 
 @csrf_exempt
 def viber_view(request):
@@ -112,6 +114,8 @@ def viber_view(request):
                     )
 
                     # SEND AD TO SELLERS
+                    for seller in sellers:
+                        viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
 
                     viber.send_messages(viber_request.sender.id, [
                         TextMessage(text="Объявление изменено и опубликовано. Оно удалится через 24 часа.",
@@ -155,7 +159,8 @@ def viber_view(request):
                 )
 
                 # SEND AD TO SELLERS
-                
+                for seller in sellers:
+                    viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
