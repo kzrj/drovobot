@@ -115,7 +115,10 @@ def viber_view(request):
 
                     # SEND AD TO SELLERS
                     for seller in sellers:
-                        viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                        try:
+                            viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                        except:
+                            pass
 
                     viber.send_messages(viber_request.sender.id, [
                         TextMessage(text="Объявление изменено и опубликовано. Оно удалится через 24 часа.",
@@ -160,7 +163,10 @@ def viber_view(request):
 
                 # SEND AD TO SELLERS
                 for seller in sellers:
-                    viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                    try:
+                        viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                    except:
+                        pass
 
                 # send choose amount
                 viber.send_messages(viber_request.sender.id, [
