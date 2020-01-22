@@ -116,7 +116,9 @@ def viber_view(request):
                     # SEND AD TO SELLERS
                     for seller in sellers:
                         try:
-                            viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                            viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad)),
+                             KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6)])
                         except:
                             pass
 
@@ -164,7 +166,9 @@ def viber_view(request):
                 # SEND AD TO SELLERS
                 for seller in sellers:
                     try:
-                        viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad))])
+                        viber.send_messages(seller.viber_id, [TextMessage(text=str(customer.get_ad)),
+                            KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6)])
                     except:
                         pass
 
