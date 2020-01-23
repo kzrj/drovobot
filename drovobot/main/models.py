@@ -53,6 +53,14 @@ class Customer(CoreModel):
         self.save()
 
 
+class AdManager(models.Manager):
+    def create_all_in_one(self):
+        text = ''
+        for ad in self.get_queryset().filter(active=True):
+            text = text + str(ad) + '\n'
+        return text
+
+
 class Ad(CoreModel):
     LOCATIONS = [
         ('Левый берег', 'Левый берег'),
@@ -73,6 +81,8 @@ class Ad(CoreModel):
     active = models.BooleanField(default=True)
     location = models.CharField(max_length=200, null=True, choices=LOCATIONS)
     amount = models.CharField(max_length=200, null=True, choices=AMOUNTS)
+
+    objects = AdManager()
 
     def __str__(self):
         return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'

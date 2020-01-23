@@ -214,15 +214,21 @@ def viber_view(request):
                 ])
 
             if viber_request.message.text == 'SHOW_ADS':
-                ads = Ad.objects.filter(active=True)
+                # ads = Ad.objects.filter(active=True)
+                text_ads = Ad.objects.create_all_in_one()
+
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
+
                 if ads.count() == 0:
                     viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='нет обьявлений') ])
-                for ad in ads:
+                else:
+                    # for ad in ads:
+                    #     viber.send_messages(viber_request.sender.id, 
+                    #         [ TextMessage(text=ad.to_text) ])
                     viber.send_messages(viber_request.sender.id, 
-                        [ TextMessage(text=ad.to_text) ])
+                            [ TextMessage(text=text_ads) ])
                 # send main menu
                 viber.send_messages(viber_request.sender.id, [
                     KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
