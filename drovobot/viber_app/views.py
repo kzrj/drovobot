@@ -214,7 +214,7 @@ def viber_view(request):
                 ])
 
             if viber_request.message.text == 'SHOW_ADS':
-                # ads = Ad.objects.filter(active=True)
+                ads = Ad.objects.filter(active=True)
                 text_ads = Ad.objects.create_all_in_one()
 
                 viber.send_messages(viber_request.sender.id, 
