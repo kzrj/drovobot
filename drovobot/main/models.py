@@ -100,7 +100,7 @@ class Ad(CoreModel):
 
     @property
     def to_text(self):
-        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone} {self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
 
     @property
     def activate(self):
