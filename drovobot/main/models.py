@@ -96,7 +96,7 @@ class Ad(CoreModel):
     objects = AdManager()
 
     def __str__(self):
-        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone}'
+        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone} {self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
 
     @property
     def to_text(self):
