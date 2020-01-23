@@ -58,7 +58,7 @@ class Customer(CoreModel):
         self.active = False
         self.save()
 
-    def active(self):
+    def activate(self):
         if not self.active:
             self.active = True
             self.save()

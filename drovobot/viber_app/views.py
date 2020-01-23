@@ -42,7 +42,7 @@ viber = Api(BotConfiguration(
 COUNTDOWN = 86400
 # 86400 = 24h
 
-sellers = Customer.objects.filter(subscribed=True)
+sellers = Customer.objects.filter(subscribed=True, active=True)
 
 @csrf_exempt
 def viber_view(request):
@@ -301,7 +301,7 @@ def viber_view(request):
             )
 
         if not created:
-            customer.active()
+            customer.activate()
 
     elif isinstance(viber_request, ViberUnsubscribedRequest):
         customer, created = Customer.objects.get_or_create(
