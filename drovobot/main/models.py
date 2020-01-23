@@ -95,12 +95,15 @@ class Ad(CoreModel):
 
     objects = AdManager()
 
+    class Meta:
+        ordering = ('modified_at', )
+
     def __str__(self):
-        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone} \n {self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
+        return f'Куплю дрова {self.amount} {self.location} \nт. {self.owner.phone} \n{self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
 
     @property
     def to_text(self):
-        return f'Куплю дрова {self.amount} {self.location} т. {self.owner.phone} \n {self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
+        return f'Куплю дрова {self.amount} {self.location} \nт. {self.owner.phone} \n{self.modified_at.strftime("%d-%b-%Y (%H:%M)")}'
 
     @property
     def activate(self):
