@@ -204,10 +204,16 @@ def viber_view(request):
                      min_api_version=6),
                 ])
 
-            if viber_request.message.text == 'SHOW_ADS':
+            if viber_request.message.text == 'SUBSCRIBE':
                 # subscribe customer
                 customer.subscribe()
+                viber.send_messages(viber_request.sender.id, [
+                    TextMessage(text='Вы будете получать новые объявления.'),
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6),
+                ])
 
+            if viber_request.message.text == 'SHOW_ADS':
                 ads = Ad.objects.filter(active=True)
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])
