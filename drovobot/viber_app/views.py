@@ -116,8 +116,7 @@ def viber_view(request):
                     for seller in sellers:
                         try:
                             viber.send_messages(seller.viber_id, [
-                                TextMessage(text="Новое объявление:"),
-                                TextMessage(text=str(customer.get_ad)),
+                                TextMessage(text="Новое объявление:" + '\n' + str(customer.get_ad)),
                                 KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
                      min_api_version=6)])
                         except:
