@@ -57,7 +57,7 @@ class AdManager(models.Manager):
     def create_all_in_one(self):
         text = ''
         for ad in self.get_queryset().filter(active=True):
-            text = text + str(ad) + '\n'
+            text = text + str(ad) + '\n' + '----------------' + '\n'
         return text
 
 
