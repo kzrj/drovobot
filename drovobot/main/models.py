@@ -25,6 +25,8 @@ class Customer(CoreModel):
 
     subscribed = models.BooleanField(default=False)
 
+    active = models.BooleanField(default=True)
+
     objects = CustomerManager()
 
     def __str__(self):
@@ -51,6 +53,15 @@ class Customer(CoreModel):
     def subscribe(self):
         self.subscribed = True
         self.save()
+
+    def deactivate(self):
+        self.active = False
+        self.save()
+
+    def active(self):
+        if not self.active:
+            self.active = True
+            self.save()
 
 
 class AdManager(models.Manager):

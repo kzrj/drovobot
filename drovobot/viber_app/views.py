@@ -42,7 +42,7 @@ viber = Api(BotConfiguration(
 COUNTDOWN = 86400
 # 86400 = 24h
 
-sellers = Customer.objects.filter(subscribed=True)
+sellers = Customer.objects.filter(subscribed=True, active=True)
 
 
 @csrf_exempt
@@ -174,6 +174,7 @@ def viber_view(request):
                             KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
                      min_api_version=6)])
                     except:
+                        customer.deactivate()
                         pass
 
                 # send choose amount
@@ -294,9 +295,24 @@ def viber_view(request):
         ])
 
     elif isinstance(viber_request, ViberSubscribedRequest):
-        viber.send_messages(viber_request.user.id, [
-            TextMessage(text="thanks for subscribing!")
-        ])
+        customer, created = Customer.objects.get_or_create(
+            viber_id=viber_request.sender.id,
+            viber_name=viber_request.sender.name,
+            viber_avatar=viber_request.sender.avatar,
+            )
+
+        if not created:
+            customer.active()
+
+    elif isinstance(viber_request, ViberUnsubscribedRequest):
+        customer, created = Customer.objects.get_or_create(
+            viber_id=viber_request.sender.id,
+            viber_name=viber_request.sender.name,
+            viber_avatar=viber_request.sender.avatar,
+            )
+        
+        if not created:
+            customer.deactivate()
 
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warn("client failed receiving message. failure: {0}".format(viber_request))
