@@ -48,7 +48,19 @@ MAIN_MENU_BUTTONS = [
             "ActionType": "reply",
             "ActionBody": "SHOW_ADS",
             "ReplyType": "message",
-            "Text": "Я продаю дрова. Посмотреть объявления."
+            "Text": "Я продаю дрова. Посмотреть объявления. Получать новые объявления."
+        },
+        {
+            "Columns": 2,
+            "Rows": 2,
+            "BgColor": "#e6f5ff",
+            "BgMedia": "http://link.to.button.image",
+            "BgMediaType": "picture",
+            "BgLoop": True,
+            "ActionType": "reply",
+            "ActionBody": "UNSUBSCRIBE",
+            "ReplyType": "message",
+            "Text": "Отписаться от объявлений."
         }
     ]
 

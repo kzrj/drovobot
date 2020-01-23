@@ -194,7 +194,20 @@ def viber_view(request):
 
         elif viber_request.message.tracking_data == 'TRACKING_MAIN_MENU':
             # show ads
+
+            if viber_request.message.text == 'UNSUBSCRIBE':
+                # subscribe customer
+                customer.unsubscribe()
+                viber.send_messages(viber_request.sender.id, [
+                    TextMessage(text='Вы больше не будете получать новые объявления.'),
+                    KeyboardMessage(tracking_data='TRACKING_MAIN_MENU', keyboard=MAIN_MENU_KEYBOARD,
+                     min_api_version=6),
+                ])
+
             if viber_request.message.text == 'SHOW_ADS':
+                # subscribe customer
+                customer.subscribe()
+
                 ads = Ad.objects.filter(active=True)
                 viber.send_messages(viber_request.sender.id, 
                         [ TextMessage(text='Все объявления:') ])

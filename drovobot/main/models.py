@@ -23,6 +23,8 @@ class Customer(CoreModel):
     phone = models.CharField(max_length=11, null=True)
     banned = models.BooleanField(default=False)
 
+    subscribed = models.BooleanField(default=False)
+
     objects = CustomerManager()
 
     def __str__(self):
@@ -41,6 +43,14 @@ class Customer(CoreModel):
             return True
 
         return False
+
+    def unsubscribe(self):
+        self.subscribed = False
+        self.save()
+
+    def subscribe(self):
+        self.subscribed = True
+        self.save()
 
 
 class Ad(CoreModel):
