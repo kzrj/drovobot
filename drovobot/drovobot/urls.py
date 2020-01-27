@@ -19,8 +19,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from viber_app.views import viber_view
+from main.views import links_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('viber/', viber_view, name='viber'),
+    path('links_page_viber/', links_page, name='viber_links'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
