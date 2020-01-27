@@ -8,12 +8,15 @@
 		  gtag('js', new Date());
 
 		  gtag('config', 'G-QE9S1J969N');
+		  {% if test_var %}
+			console.log('{{ test_var }}')
+		  {% endif %}
 		</script>
 	</head>
 	<body>
 		<script>
 			console.log('{{ test_var }}')
-			console.log({{ test_var }})
+			
 			// location.replace("https://www.youtube.com")
 			console.log('After')
 		</script>
