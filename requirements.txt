@@ -8,4 +8,4 @@ gunicorn
 psycopg2-binary
 mixer
 viberbot
-celery==4.2.1
+celery==5.2.2
